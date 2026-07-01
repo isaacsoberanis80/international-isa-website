@@ -41,3 +41,11 @@ This is the raw material for resume bullets later — keep entries honest and sp
   app, write templates, and set up git — much faster than doing it by hand,
   but I still need to read through the generated code to understand it, not
   just accept it blindly.
+
+**Testing/debugging:**
+- Ran the Flask dev server locally and tested every route with `curl`, then
+  submitted the contact form with `curl -X POST --data-urlencode` to confirm
+  it actually writes to SQLite (checked with a raw `sqlite3`/`sqlite3` query)
+  instead of just trusting that the code "looks right."
+- First commit made once every page returned 200 and a real form submission
+  round-tripped through the database correctly.
