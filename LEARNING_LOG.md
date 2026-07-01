@@ -49,3 +49,23 @@ This is the raw material for resume bullets later — keep entries honest and sp
   instead of just trusting that the code "looks right."
 - First commit made once every page returned 200 and a real form submission
   round-tripped through the database correctly.
+
+---
+
+## 2026-07-01 — Scope decision: MVP first, API integration later
+
+**Decision:** Descoped Twilio/email API integration out of the MVP. The site
+already does what a v1 needs — Home, Services, Contact form, About/company
+info, with leads saved locally — so we're calling that "done" and holding
+the SMS/email notification piece for a follow-up phase instead of blocking
+launch on it.
+
+**Security note:** Learned the hard way that pasting API credentials directly
+into chat is a bad habit — even a partial/wrong-service key should be treated
+as burned the moment it's typed somewhere outside a `.env` file, and rotated
+immediately. Going forward, credentials get created, then confirmed as saved
+locally, never pasted into the conversation itself.
+
+**Still deferred to a later phase:**
+- Twilio (or Resend/SendGrid) integration for real-time lead notifications.
+- Domain purchase/confirmation and hosting decision.
