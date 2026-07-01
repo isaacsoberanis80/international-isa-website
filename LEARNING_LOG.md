@@ -1,0 +1,43 @@
+# Learning Log — International ISA Website
+
+Running log of what got built and what I learned, session by session.
+This is the raw material for resume bullets later — keep entries honest and specific.
+
+---
+
+## 2026-07-01 — Project kickoff
+
+**What we built:**
+- Set up the project: git repo, Python virtual environment, Flask app structure
+  (`app/` package with routes, templates, static files).
+- Built the first version of the marketing site: Home, Services, About, and
+  Contact pages, modeled on a real competitor (PowerISA) but written for
+  International ISA's own positioning (bilingual ISAs, quality-first).
+- Built a working lead-capture form on the Contact page that saves submissions
+  to a local SQLite database (`app/db.py`).
+- Basic styling (`app/static/css/style.css`) — no framework, hand-written CSS.
+
+**Python/Flask concepts touched:**
+- App factory pattern (`create_app()` in `app/__init__.py`) instead of one
+  global file — keeps the app testable and configurable.
+- Blueprints (`app/routes.py`) to organize routes.
+- Jinja2 templates with template inheritance (`base.html` + `{% extends %}`,
+  `{% block %}`) so every page shares the same header/footer without
+  copy-pasting HTML.
+- `request.form` to read submitted form data; parameterized SQL queries
+  (`?` placeholders) to avoid SQL injection when saving leads.
+- Environment variables for secrets (`SECRET_KEY`) instead of hardcoding them.
+
+**Still to do / next session:**
+- Wire up an email API (Resend or SendGrid) so a real email fires when a lead
+  submits the form — this will be the first true third-party API integration.
+- Buy/confirm the domain (internationalisa.com looked unregistered as of
+  today, needs to be confirmed on a registrar).
+- Decide on hosting (leaning Render or Railway for a real, production-grade
+  but appropriately-sized setup).
+
+**Claude Code notes:**
+- First real session using Claude Code end-to-end: had it scaffold the Flask
+  app, write templates, and set up git — much faster than doing it by hand,
+  but I still need to read through the generated code to understand it, not
+  just accept it blindly.

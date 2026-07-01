@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Services — International ISA{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Services</h1>
+  <p class="lead">Everything you need to keep your pipeline full, without adding headcount.</p>
+</section>
+
+<section class="services-grid">
+  <div class="service-card">
+    <h3>Full-Time Inside Sales Agents</h3>
+    <p>A dedicated, bilingual ISA embedded in your team, working your leads every day.</p>
+  </div>
+  <div class="service-card">
+    <h3>Cold Calling &amp; Prospecting</h3>
+    <p>Professional, needs-based outreach that opens doors instead of burning through lists.</p>
+  </div>
+  <div class="service-card">
+    <h3>Lead Management &amp; Tracking</h3>
+    <p>Every lead logged, prioritized, and followed up on — nothing falls through the cracks.</p>
+  </div>
+  <div class="service-card">
+    <h3>Live Call Transfers</h3>
+    <p>Qualified leads handed to you in real time, ready to talk.</p>
+  </div>
+  <div class="service-card">
+    <h3>Onboarding &amp; Ongoing Training</h3>
+    <p>Every ISA is trained on your scripts, your market, and your standards before day one — and coached continuously after.</p>
+  </div>
+  <div class="service-card">
+    <h3>Lead Nurturing &amp; Follow-Up</h3>
+    <p>Long-cycle leads stay warm with consistent, personal follow-up until they're ready to buy or sell.</p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>See what a trained ISA can do for your pipeline.</h2>
+  <a class="cta-large" href="{{ url_for('main.contact') }}">Book a Free Demo</a>
+</section>
+{% endblock %}

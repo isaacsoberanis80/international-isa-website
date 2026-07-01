@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}International ISA — Inside Sales Agents for Realtors{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>More qualified leads. Less time on the phone.</h1>
+  <p class="lead">International ISA supplies trained, bilingual Inside Sales Agents who prospect, qualify, and nurture leads for your real estate team — so you spend your time closing, not cold calling.</p>
+  <a class="cta-large" href="{{ url_for('main.contact') }}">Book a Free Demo</a>
+</section>
+
+<section class="values">
+  <div class="value-card">
+    <h3>Leverage</h3>
+    <p>Add sales capacity without the cost or hassle of hiring and training in-house.</p>
+  </div>
+  <div class="value-card">
+    <h3>Quality</h3>
+    <p>Bilingual, needs-based agents who build real relationships with every lead — not scripts read off a page.</p>
+  </div>
+  <div class="value-card">
+    <h3>Results</h3>
+    <p>More appointments set, more deals closed, tracked and reported every step of the way.</p>
+  </div>
+</section>
+
+<section class="services-preview">
+  <h2>What We Do</h2>
+  <ul>
+    <li>Full-time Inside Sales Agents (ISAs)</li>
+    <li>Cold calling &amp; prospecting</li>
+    <li>Lead management &amp; tracking</li>
+    <li>Live call transfers</li>
+    <li>Onboarding &amp; ongoing training</li>
+    <li>Lead nurturing &amp; follow-up</li>
+  </ul>
+  <a href="{{ url_for('main.services') }}">See all services &rarr;</a>
+</section>
+{% endblock %}
