@@ -328,3 +328,27 @@ this because it blocks navigation to `localhost`/`127.0.0.1` (a deliberate
 security restriction, not a bug). Used a different tool — screen-reading
 with explicit permission, view-only — to actually see the rendered page
 and confirm the design looked right, instead of just trusting the code.
+
+---
+
+## 2026-07-01 — Conversion research: "how it works," FAQ, and an honest line about social proof
+
+**What we researched:** looked at what actually drives conversions on
+award-winning B2B/SaaS websites, rather than just guessing at "looks
+nice." The consistent finding across sources: clarity and friction removal
+matter more than visual flourish, and social proof (real client logos,
+testimonials, usage stats) is one of the biggest conversion levers.
+
+**What got built:** a 3-step "How It Works" section, a secondary CTA next
+to the primary "Book a Demo" button, an FAQ addressing real objections
+(cost model, fit, bilingual coverage, how to start), and a small
+`IntersectionObserver`-based scroll-reveal script (`reveal.js`) for subtle
+motion on scroll.
+
+**What deliberately did NOT get built:** fake testimonials, invented
+client logos, or made-up usage stats. The research kept surfacing "add
+social proof" as the single highest-impact change — but the business
+hasn't launched yet, so anything there would have to be fabricated. Faking
+that kind of trust signal is a real risk for a business's credibility once
+someone checks, not just an abstract ethics point. Left this as a clearly
+flagged gap to fill later with real client results, not synthetic ones.
