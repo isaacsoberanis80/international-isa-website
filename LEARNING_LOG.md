@@ -69,3 +69,44 @@ locally, never pasted into the conversation itself.
 **Still deferred to a later phase:**
 - Twilio (or Resend/SendGrid) integration for real-time lead notifications.
 - Domain purchase/confirmation and hosting decision.
+
+---
+
+## 2026-07-01 — Twilio integration attempt (paused)
+
+**What we built:** `app/notifications.py` — a `send_lead_notification()` function
+that texts the team via Twilio when a new lead comes in, using API Key auth
+(Account SID + API Key SID/Secret) instead of the master Auth Token, loaded
+from a `.env` file via `python-dotenv`. Wired into the `/contact` route so
+that a Twilio failure logs an error but never breaks the lead-saving flow —
+confirmed this with a real test where the SMS failed but the lead still
+saved correctly to SQLite.
+
+**What went wrong:** Spent most of this session on Twilio Console
+credential-hunting, not code. Three different failures in a row, in order:
+1. `401: no requested permission` — the API Key was created as "Restricted"
+   type without Messages scope.
+2. `401: Authenticate` — Account SID and API Key SID got mixed up in `.env`
+   (Account SID field had an API Key's `SK...` value pasted in instead of
+   the real `AC...` Account SID).
+3. `401: Authentication Error - invalid username` — API Key SID and Secret
+   ended up from two different key-creation events, so they no longer
+   matched each other as a pair.
+
+**Root cause, in plain terms:** Twilio's console has multiple SIDs that look
+similar (`AC...` account, `SK...` API key) scattered across different pages,
+and it's easy to paste the wrong one into the wrong field — especially the
+first time. This is a real, common failure mode with third-party API
+credentials, not a coding bug.
+
+**Decision:** Paused here rather than burn more time chasing it. The code
+itself (`app/notifications.py`) is written and ready — this is purely a
+credential-configuration problem, not a code problem. Picking this back up
+later with a fresh Twilio API Key created in one clean pass (SID and Secret
+copied together, Account SID copied separately and double-checked for the
+`AC` prefix) should resolve it quickly.
+
+**Resume-worthy takeaway:** Debugged a real third-party API authentication
+failure across three distinct causes, using the Twilio error codes/messages
+to diagnose each one — this is the exact kind of troubleshooting a Customer
+Success/Solutions Engineer does with customers' own API integrations.
