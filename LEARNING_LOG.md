@@ -146,3 +146,49 @@ be a number *owned in the Twilio account*, not a personal cell.
 Twilio Console navigation and credential mismatches, not on the ~40 lines
 of Python in `notifications.py` itself. Worth remembering next time: the
 code was right on the first try; the credentials took five attempts.
+
+---
+
+## 2026-07-01 — Phase 2: internal team dashboard (login, leads, tasks)
+
+**What we built:**
+- `users`, `tasks` tables and a `status` column on `leads`, added in `app/db.py`.
+- Login system with **Flask-Login**: `app/auth.py` defines a `User` class
+  and a `user_loader`; sessions are cookie-based, routes are protected with
+  `@login_required`.
+- Passwords are never stored in plain text — hashed with Werkzeug's
+  `generate_password_hash` / `check_password_hash`.
+- `create_admin.py` — a one-time interactive script (`getpass`, so the
+  password doesn't echo to the terminal) to create the first team login,
+  since there's no public signup for an internal tool.
+- `/dashboard` (protected): a table of all leads with a dropdown to update
+  status (New/Contacted/Qualified/Closed), and a personal to-do list scoped
+  to the logged-in user (add + mark complete).
+
+**New concepts:**
+- Session-based auth vs. the stateless API-key auth used for Twilio — a
+  browser session cookie identifies *who's logged in*, separate from any
+  API credential.
+- `@login_required` decorator pattern — redirects to `/dashboard/login`
+  automatically if there's no active session, instead of every route
+  manually checking `current_user`.
+- Scoping a query to the logged-in user (`WHERE user_id = ?`) so one
+  person's tasks don't show up for another.
+
+**A real bug, not a config issue this time:** `generate_password_hash()`
+crashed with `AttributeError: module 'hashlib' has no attribute 'scrypt'`.
+Root cause: this Mac's Python is built against **LibreSSL**, not OpenSSL,
+and LibreSSL doesn't implement `scrypt` — but Werkzeug defaults to scrypt
+for password hashing since a recent version. Fixed by explicitly requesting
+`generate_password_hash(password, method="pbkdf2:sha256")` instead, which
+doesn't depend on scrypt. A good reminder that "works everywhere" isn't
+automatic — the same code can fail differently depending on what crypto
+library Python was compiled against.
+
+**Tested end-to-end with curl + a cookie jar:** confirmed an unauthenticated
+request to `/dashboard/` redirects to login (302), a valid login sets a
+session cookie, the dashboard then loads and shows a real submitted lead,
+updating lead status and adding/completing a task all persist to SQLite,
+and logging out invalidates the session (dashboard becomes unreachable
+again). Deleted the test user/data afterward — the real team login gets
+created by running `create_admin.py` directly.

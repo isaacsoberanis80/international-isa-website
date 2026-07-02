@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — International ISA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    table { width: 100%; border-collapse: collapse; margin: 16px 0 40px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    select { padding: 4px; }
+    .task-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .task-row.done .task-desc { text-decoration: line-through; color: var(--muted); }
+    .task-desc { flex: 1; }
+    .inline-form { display: inline; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="{{ url_for('dashboard.home') }}">International ISA — Team</a>
+    <nav>
+      <span style="margin-right:16px;">Hi, {{ current_user.username }}</span>
+      <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>
+      {% endif %}
+    {% endwith %}
+
+    <h1 class="page-header">Leads</h1>
+    <table>
+      <tr>
+        <th>Name</th><th>Email</th><th>Phone</th><th>Brokerage</th><th>Status</th><th>Received</th>
+      </tr>
+      {% for lead in leads %}
+      <tr>
+        <td>{{ lead.name }}</td>
+        <td>{{ lead.email }}</td>
+        <td>{{ lead.phone }}</td>
+        <td>{{ lead.brokerage }}</td>
+        <td>
+          <form class="inline-form" method="post" action="{{ url_for('dashboard.set_lead_status', lead_id=lead.id) }}">
+            <select name="status" onchange="this.form.submit()">
+              {% for s in statuses %}
+              <option value="{{ s }}" {% if s == lead.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td>{{ lead.created_at }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6">No leads yet.</td></tr>
+      {% endfor %}
+    </table>
+
+    <h1 class="page-header">My Tasks</h1>
+    <form method="post" action="{{ url_for('dashboard.create_task') }}" style="display:flex; gap:8px; margin-bottom:16px;">
+      <input type="text" name="description" placeholder="Follow up with..." required style="flex:1; padding:8px; border:1px solid var(--border); border-radius:6px;">
+      <button type="submit" class="cta-large" style="margin-top:0;">Add</button>
+    </form>
+    {% for task in tasks %}
+    <div class="task-row {% if task.done %}done{% endif %}">
+      <span class="task-desc">{{ task.description }}</span>
+      {% if not task.done %}
+      <form class="inline-form" method="post" action="{{ url_for('dashboard.finish_task', task_id=task.id) }}">
+        <button type="submit">Done</button>
+      </form>
+      {% endif %}
+    </div>
+    {% else %}
+    <p>No tasks yet.</p>
+    {% endfor %}
+  </main>
+</body>
+</html>

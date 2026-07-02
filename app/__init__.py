@@ -13,7 +13,13 @@ def create_app():
     from .db import init_db
     init_db()
 
+    from .auth import login_manager
+    login_manager.init_app(app)
+
     from .routes import main
     app.register_blueprint(main)
+
+    from .dashboard import dashboard
+    app.register_blueprint(dashboard)
 
     return app

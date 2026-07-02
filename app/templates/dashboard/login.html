@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team Login — International ISA</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main style="max-width:360px;">
+    <h1 class="page-header">Team Login</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash" style="background:#fcebeb;border-color:#e24b4a;">
+          {% for message in messages %}<p>{{ message }}</p>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form class="lead-form" method="post">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit" class="cta-large">Log In</button>
+    </form>
+  </main>
+</body>
+</html>
