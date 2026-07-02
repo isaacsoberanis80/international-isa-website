@@ -352,3 +352,27 @@ hasn't launched yet, so anything there would have to be fabricated. Faking
 that kind of trust signal is a real risk for a business's credibility once
 someone checks, not just an abstract ethics point. Left this as a clearly
 flagged gap to fill later with real client results, not synthetic ones.
+
+---
+
+## 2026-07-01 — Session paused: everything committed locally, one push pending
+
+Stopping for the day. Status so far:
+- All work through the design refresh + conversion research pass is
+  **committed locally** (latest commit: `18d11b1`).
+- **Not yet pushed to GitHub** — the live site (Render) is still running
+  the older commit (`91c9fd3`, the SQLAlchemy migration). A fresh GitHub
+  token was generated but the `git push` kept failing (token pasted into
+  the Username prompt instead of Password) and wasn't confirmed working
+  before we stopped.
+
+**Next session, first step:** finish the push.
+```
+cd ~/Documents/international-isa-website
+git push
+```
+Username: your GitHub username. Password: a **fresh** Personal Access
+Token (the last one should be revoked at github.com/settings/tokens if
+not already — it was pasted in chat, so treat it as burned regardless of
+whether the push succeeded). Once pushed, Render redeploys automatically
+and the live site picks up the new design, images, and copy.
