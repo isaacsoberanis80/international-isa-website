@@ -244,3 +244,59 @@ for a persistent disk" specifically because this will hold real lead data
 for a real business — SQLite files on ephemeral hosting disks get wiped on
 every redeploy, which is an unacceptable risk once real leads start coming
 in through the contact form.
+
+---
+
+## 2026-07-01 — Phase 3: deployed to production (Render + GitHub)
+
+**International ISA is live:** https://international-isa-website.onrender.com
+
+**What it took to get there:**
+1. **GitHub**: pushed the local repo to a new GitHub repo. HTTPS git push
+   needed a Personal Access Token, not a GitHub password (GitHub dropped
+   plain password auth for git years ago) — generated one with `repo` scope,
+   used it once, then revoked it immediately after the push succeeded.
+2. **Render Postgres**: created a free Postgres instance for real, persistent
+   lead storage (see the SQLAlchemy migration entry above for why this
+   mattered).
+3. **Render Web Service**: connected the GitHub repo, set the build/start
+   commands, and added the 7 production environment variables (`SECRET_KEY`,
+   `DATABASE_URL`, and the 5 Twilio values) through Render's dashboard —
+   much less error-prone than the local `.env` file experience, since it's
+   just filling in a web form instead of a terminal prompt.
+
+**Two real deploy failures, both fixed by reading the actual error:**
+- `gunicorn.errors.AppImportError: Failed to find attribute 'app' in 'app'`
+  — Render's auto-detected start command (`gunicorn app:app`) didn't match
+  this project's structure (`run.py` is the real entry point, not a
+  top-level `app` module). Fixed by setting the Start Command explicitly to
+  `gunicorn run:app`.
+- `sqlalchemy.exc.ArgumentError: Could not parse SQLAlchemy URL from given
+  URL string` — the `DATABASE_URL` value got corrupted when copy-pasted
+  into Render's environment variable field. Fixed by using the database
+  page's own "Copy" button instead of manually selecting/dragging the text
+  (manual selection is an easy way to grab a stray space or miss a
+  character in a long connection string).
+
+**How the debugging actually happened this time:** copy-pasting log text
+back and forth stopped working reliably partway through (wrong window
+copied, browser dev-tools output pasted by mistake instead of the Render
+logs). Switched to giving Claude direct, permissioned access to the browser
+to read the actual dashboard and logs and make the fixes directly, instead
+of relaying text back and forth by hand. Worth remembering as a technique:
+when a problem is "I can't tell you what I'm looking at," screen access
+beats more rounds of "copy this, no not that."
+
+**Verified for real, not just "it deployed":** submitted an actual lead
+through the *live* contact form (not local) and confirmed both the
+database write and the Twilio SMS notification fired correctly against
+production infrastructure — not just against the local dev setup.
+
+**Full picture of this project, phase to phase:** Flask app scaffold →
+marketing site with a real lead-capture form → third-party SMS API
+integration (Twilio) → session-based authentication and an internal
+ops dashboard → SQLAlchemy database layer built for prod/dev parity →
+live deployment on Render with a managed Postgres database, fronted by a
+real GitHub repo and a real production WSGI server. Every step was tested
+against real data, not just "looks right" — this is the strongest, most
+concrete project to point to for the resume rewrite.

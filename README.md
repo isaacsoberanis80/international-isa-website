@@ -3,12 +3,15 @@
 Marketing site + internal ops dashboard for International ISA, a bilingual
 Inside Sales Agent (ISA) staffing service for real estate teams.
 
+**Live:** https://international-isa-website.onrender.com
+
 ## Stack
 
 - Python 3 / Flask
-- SQLite (leads, users, tasks)
+- SQLAlchemy (SQLite locally, Postgres in production)
 - Flask-Login (session auth for the team dashboard)
 - Twilio (SMS notification on new lead)
+- gunicorn (production WSGI server), deployed on Render
 - Vanilla HTML/CSS (no JS framework)
 
 ## Running locally
@@ -28,6 +31,7 @@ Visit http://127.0.0.1:5050 (marketing site) or http://127.0.0.1:5050/dashboard 
 1. **Marketing site** — Home, Services, About, Contact/lead capture. ✅
 2. **SMS API integration (Twilio)** — text the team when a lead form is submitted. ✅
 3. **Ops dashboard** — login for the International ISA team, lead status board, task tracking. ✅
-4. **Deploy** — real domain + production hosting. Not started.
+4. **Deploy** — Render (web service + Postgres), GitHub-connected, live. ✅
+5. **Custom domain** — internationalisa.com not yet purchased/connected. Not started.
 
 See `LEARNING_LOG.md` for a running log of what was built and learned at each step.
