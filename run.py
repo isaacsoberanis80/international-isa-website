@@ -6,4 +6,5 @@ app = create_app()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
-    app.run(debug=True, port=port)
+    debug = os.environ.get("FLASK_DEBUG", "1") == "1"
+    app.run(debug=debug, port=port)

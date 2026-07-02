@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 
-from .auth import User
 from .db import (
     get_user_by_username,
     get_all_leads,
@@ -22,9 +21,9 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        row = get_user_by_username(username)
-        if row and check_password_hash(row["password_hash"], password):
-            login_user(User(row))
+        user = get_user_by_username(username)
+        if user and check_password_hash(user.password_hash, password):
+            login_user(user)
             return redirect(url_for("dashboard.home"))
         flash("Invalid username or password.")
     return render_template("dashboard/login.html")

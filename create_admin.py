@@ -12,21 +12,21 @@ from app.db import create_user, get_user_by_username
 
 
 def main():
-    create_app()  # ensures the database tables exist
+    app = create_app()
+    with app.app_context():
+        username = input("Username: ").strip()
+        if get_user_by_username(username):
+            print(f"'{username}' already exists.")
+            return
 
-    username = input("Username: ").strip()
-    if get_user_by_username(username):
-        print(f"'{username}' already exists.")
-        return
+        password = getpass.getpass("Password (hidden while typing): ")
+        confirm = getpass.getpass("Confirm password: ")
+        if password != confirm:
+            print("Passwords didn't match, try again.")
+            return
 
-    password = getpass.getpass("Password (hidden while typing): ")
-    confirm = getpass.getpass("Confirm password: ")
-    if password != confirm:
-        print("Passwords didn't match, try again.")
-        return
-
-    create_user(username, generate_password_hash(password, method="pbkdf2:sha256"))
-    print(f"User '{username}' created. Log in at /dashboard/login")
+        create_user(username, generate_password_hash(password, method="pbkdf2:sha256"))
+        print(f"User '{username}' created. Log in at /dashboard/login")
 
 
 if __name__ == "__main__":

@@ -1,130 +1,49 @@
-import sqlite3
-from pathlib import Path
-
-DB_PATH = Path(__file__).parent.parent / "leads.db"
-
-
-def get_connection():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
-
-
-def init_db():
-    conn = get_connection()
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS leads (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            phone TEXT,
-            brokerage TEXT,
-            message TEXT,
-            status TEXT NOT NULL DEFAULT 'New',
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-        """
-    )
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL UNIQUE,
-            password_hash TEXT NOT NULL,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-        """
-    )
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS tasks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            description TEXT NOT NULL,
-            done INTEGER NOT NULL DEFAULT 0,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-        """
-    )
-    conn.commit()
-    conn.close()
+from .models import db, Lead, User, Task
 
 
 def save_lead(name, email, phone, brokerage, message):
-    conn = get_connection()
-    conn.execute(
-        "INSERT INTO leads (name, email, phone, brokerage, message) VALUES (?, ?, ?, ?, ?)",
-        (name, email, phone, brokerage, message),
-    )
-    conn.commit()
-    conn.close()
+    lead = Lead(name=name, email=email, phone=phone, brokerage=brokerage, message=message)
+    db.session.add(lead)
+    db.session.commit()
 
 
 def get_all_leads():
-    conn = get_connection()
-    rows = conn.execute("SELECT * FROM leads ORDER BY created_at DESC").fetchall()
-    conn.close()
-    return rows
+    return Lead.query.order_by(Lead.created_at.desc()).all()
 
 
 def update_lead_status(lead_id, status):
-    conn = get_connection()
-    conn.execute("UPDATE leads SET status = ? WHERE id = ?", (status, lead_id))
-    conn.commit()
-    conn.close()
+    lead = db.session.get(Lead, lead_id)
+    if lead:
+        lead.status = status
+        db.session.commit()
 
 
 def create_user(username, password_hash):
-    conn = get_connection()
-    conn.execute(
-        "INSERT INTO users (username, password_hash) VALUES (?, ?)",
-        (username, password_hash),
-    )
-    conn.commit()
-    conn.close()
+    user = User(username=username, password_hash=password_hash)
+    db.session.add(user)
+    db.session.commit()
 
 
 def get_user_by_username(username):
-    conn = get_connection()
-    row = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
-    conn.close()
-    return row
+    return User.query.filter_by(username=username).first()
 
 
 def get_user_by_id(user_id):
-    conn = get_connection()
-    row = conn.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
-    conn.close()
-    return row
+    return db.session.get(User, int(user_id))
 
 
 def add_task(user_id, description):
-    conn = get_connection()
-    conn.execute(
-        "INSERT INTO tasks (user_id, description) VALUES (?, ?)",
-        (user_id, description),
-    )
-    conn.commit()
-    conn.close()
+    task = Task(user_id=user_id, description=description)
+    db.session.add(task)
+    db.session.commit()
 
 
 def get_tasks_for_user(user_id):
-    conn = get_connection()
-    rows = conn.execute(
-        "SELECT * FROM tasks WHERE user_id = ? ORDER BY done ASC, created_at DESC",
-        (user_id,),
-    ).fetchall()
-    conn.close()
-    return rows
+    return Task.query.filter_by(user_id=user_id).order_by(Task.done.asc(), Task.created_at.desc()).all()
 
 
 def complete_task(task_id, user_id):
-    conn = get_connection()
-    conn.execute(
-        "UPDATE tasks SET done = 1 WHERE id = ? AND user_id = ?",
-        (task_id, user_id),
-    )
-    conn.commit()
-    conn.close()
+    task = db.session.get(Task, task_id)
+    if task and task.user_id == user_id:
+        task.done = True
+        db.session.commit()

@@ -192,3 +192,55 @@ updating lead status and adding/completing a task all persist to SQLite,
 and logging out invalidates the session (dashboard becomes unreachable
 again). Deleted the test user/data afterward — the real team login gets
 created by running `create_admin.py` directly.
+
+**Mistake made and owned:** accidentally deleted `leads.db` while cleaning
+up test data from the password-reset script, which wiped out the real team
+login that had just been created. No real lead data was lost (there wasn't
+any yet), but it meant redoing the account creation. Lesson: don't run
+`rm -f` on a shared data file without checking first whether it holds
+anything real.
+
+---
+
+## 2026-07-01 — Phase 3 prep: SQLAlchemy + Postgres-ready, gunicorn
+
+**Decision:** Before deploying, swapped raw `sqlite3` for **Flask-SQLAlchemy**
+so the exact same code works against SQLite locally and Postgres in
+production — no separate code paths to maintain. Chose this over sticking
+with raw SQL + `psycopg2` because dev/prod parity matters more than saving
+a dependency, and SQLAlchemy is one of the most in-demand Python skills to
+have hands-on experience with.
+
+**What changed:**
+- `app/models.py` — `Lead`, `User` (now implements `flask_login.UserMixin`
+  directly, no wrapper class needed), and `Task` as SQLAlchemy models.
+- `app/db.py` — same function names as before (`save_lead`,
+  `get_all_leads`, etc.) but backed by ORM queries instead of raw SQL, so
+  `routes.py`, `dashboard.py`, `create_admin.py`, and `reset_password.py`
+  needed almost no changes.
+- `app/__init__.py` — `SQLALCHEMY_DATABASE_URI` reads `DATABASE_URL` from
+  the environment if set (production/Postgres), otherwise falls back to a
+  local `leads.db` SQLite file (development). Also handles a real gotcha:
+  Render/Heroku-style `DATABASE_URL` values start with `postgres://`, but
+  SQLAlchemy 2.x requires `postgresql://` — silently broken without this
+  one-line fix.
+- Added **gunicorn** + a `Procfile` (`web: gunicorn run:app`) — the Flask
+  dev server that's been used all along explicitly warns it's not for
+  production; gunicorn is the standard production WSGI server for Flask.
+- `run.py` no longer forces `debug=True` — controlled by a `FLASK_DEBUG`
+  env var so debug mode (which exposes a Python console on errors) doesn't
+  accidentally run in production.
+
+**Verified the migration didn't break anything:** ran the exact same
+end-to-end curl test suite as Phase 2 (submit lead, reject bad login,
+successful login, dashboard content, add task, update lead status) against
+the new SQLAlchemy-backed app, plus confirmed the *existing* SQLite data
+(the real team login created earlier) was still readable after the swap —
+no migration script needed since the table structures were already
+compatible.
+
+**Business decision, not just technical:** chose Postgres over "just pay
+for a persistent disk" specifically because this will hold real lead data
+for a real business — SQLite files on ephemeral hosting disks get wiped on
+every redeploy, which is an unacceptable risk once real leads start coming
+in through the contact form.
