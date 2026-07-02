@@ -4,14 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Team Login — International ISA</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(120% 160% at 50% -20%, #24406f 0%, var(--navy-dark) 60%);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--card);
+      border-radius: 18px;
+      padding: 40px 36px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    .login-card .logo { display: block; text-align: center; margin-bottom: 6px; font-size: 22px; }
+    .login-card .lead { text-align: center; margin: 0 auto 24px; font-size: 14px; }
+  </style>
 </head>
 <body>
-  <main style="max-width:360px;">
-    <h1 class="page-header">Team Login</h1>
+  <div class="login-card">
+    <a class="logo" href="{{ url_for('main.home') }}">International ISA</a>
+    <p class="lead">Team dashboard</p>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <div class="flash" style="background:#fcebeb;border-color:#e24b4a;">
+        <div class="flash" style="background:#fcebeb;border-color:#e24b4a;color:#a32d2d;">
           {% for message in messages %}<p>{{ message }}</p>{% endfor %}
         </div>
       {% endif %}
@@ -21,8 +45,8 @@
       <input type="text" id="username" name="username" required>
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
-      <button type="submit" class="cta-large">Log In</button>
+      <button type="submit" class="cta-large" style="width:100%; text-align:center;">Log In</button>
     </form>
-  </main>
+  </div>
 </body>
 </html>
