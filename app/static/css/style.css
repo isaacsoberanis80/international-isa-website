@@ -367,6 +367,121 @@ main {
   .photo-feature img { max-height: 220px; }
 }
 
+.hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.cta-ghost {
+  display: inline-block;
+  margin-top: 28px;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 60px 0;
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding: 28px 24px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--navy-dark);
+  color: #fff;
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.step h3 { margin: 0 0 6px; font-size: 16px; color: var(--navy-dark); }
+.step p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+.faq {
+  margin: 60px 0;
+}
+
+.faq details {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--navy-dark);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+  content: "+";
+  font-size: 20px;
+  color: var(--accent-dark);
+  transition: transform 0.15s ease;
+}
+
+.faq details[open] summary::after { transform: rotate(45deg); }
+
+.faq p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .steps { grid-template-columns: 1fr; }
+}
+
 .site-footer {
   text-align: center;
   padding: 32px 24px;

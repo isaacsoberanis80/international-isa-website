@@ -5,7 +5,10 @@
   <img class="hero-bg" src="https://images.unsplash.com/photo-1621255457330-7ef4e88ec27f?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="A sales professional in a modern office making a call on a smartphone" loading="eager">
   <h1>More qualified leads. Less time on the phone.</h1>
   <p class="lead">International ISA supplies trained, bilingual Inside Sales Agents who prospect, qualify, and nurture leads for your real estate team — so you spend your time closing, not cold calling.</p>
-  <a class="cta-large" href="{{ url_for('main.contact') }}">Book a Free Demo</a>
+  <div class="hero-ctas">
+    <a class="cta-large" href="{{ url_for('main.contact') }}">Book a Free Demo</a>
+    <a class="cta-ghost" href="{{ url_for('main.services') }}">See How It Works</a>
+  </div>
   <div class="badges">
     <span>Bilingual agents</span>
     <span>Real-time lead alerts</span>
@@ -13,7 +16,7 @@
   </div>
 </section>
 
-<section class="values">
+<section class="values reveal">
   <div class="value-card">
     <div class="icon-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M19 8v4M21 10h-4"/></svg>
@@ -37,7 +40,25 @@
   </div>
 </section>
 
-<section class="image-band">
+<section class="reveal">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <h3>Tell us about your team</h3>
+      <p>A quick call about your market, your lead sources, and what "qualified" means for you.</p>
+    </div>
+    <div class="step">
+      <h3>We match &amp; train your ISA</h3>
+      <p>A bilingual agent is onboarded on your scripts, your CRM, and your standards before day one.</p>
+    </div>
+    <div class="step">
+      <h3>Leads start flowing in</h3>
+      <p>Qualified conversations land on your calendar — you focus on showing up and closing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="image-band reveal">
   <img src="https://images.unsplash.com/photo-1482790197944-0bd99292659b?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Modern high-rise city skyline representing growth and ambition in real estate" loading="lazy">
   <div class="caption">
     <h2>Built for ambitious teams</h2>
@@ -45,7 +66,7 @@
   </div>
 </section>
 
-<section class="services-preview">
+<section class="services-preview reveal">
   <h2>What We Do</h2>
   <ul>
     <li>Full-time Inside Sales Agents (ISAs)</li>
