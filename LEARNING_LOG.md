@@ -300,3 +300,31 @@ live deployment on Render with a managed Postgres database, fronted by a
 real GitHub repo and a real production WSGI server. Every step was tested
 against real data, not just "looks right" — this is the strongest, most
 concrete project to point to for the resume rewrite.
+
+---
+
+## 2026-07-01 — Design refresh: typography, imagery, and polish
+
+**What changed:** New CSS design system (Inter/Sora fonts via Google Fonts,
+a teal accent color against the existing navy, rounded pill buttons, card
+hover effects), inline SVG icons on service/value cards, and 5 free photos
+from Unsplash's CDN woven into the Home and About pages (hero background,
+a "growth" image band, and three photos in the About page narrative).
+Brought the dashboard/login pages — built earlier, before this refresh —
+up to the same visual system, and added a favicon (fixing a 404 that had
+been showing up in the logs since day one).
+
+**Sourcing images without an API key:** Unsplash's old `source.unsplash.com`
+random-image endpoint is dead (503). Used the direct `images.unsplash.com/
+photo-{id}` CDN URLs for specific, hand-picked photos instead — free to
+hotlink, no API key or account needed, and each one resizable/compressible
+via URL params (`?w=1600&q=80&auto=format`). Had to filter out
+`plus.unsplash.com` results specifically — those are Unsplash+ premium
+photos that require a paid license, easy to mix up with the free ones in
+search results.
+
+**Verification note:** couldn't use the usual browser-automation tool for
+this because it blocks navigation to `localhost`/`127.0.0.1` (a deliberate
+security restriction, not a bug). Used a different tool — screen-reading
+with explicit permission, view-only — to actually see the rendered page
+and confirm the design looked right, instead of just trusting the code.
