@@ -110,3 +110,39 @@ copied together, Account SID copied separately and double-checked for the
 failure across three distinct causes, using the Twilio error codes/messages
 to diagnose each one — this is the exact kind of troubleshooting a Customer
 Success/Solutions Engineer does with customers' own API integrations.
+
+---
+
+## 2026-07-01 — Twilio integration: resolved, working end-to-end
+
+**Picked back up the same day and got it working.** Two more issues surfaced
+after fixing the SID/Secret mismatch, both resolved:
+
+4. `400: 'To' and 'From' number cannot be the same` — `TWILIO_FROM_NUMBER`
+   and `TWILIO_NOTIFY_NUMBER` were accidentally set to the same personal
+   phone number; no dedicated Twilio number had been added yet.
+5. Fixed by querying the account directly instead of hunting through the
+   Console UI again: `client.incoming_phone_numbers.list()` returned the
+   Twilio number already provisioned on the trial account (+1 507 708 7358,
+   SMS-capable) — didn't need to buy a new one after all.
+
+**Verified end-to-end, for real:**
+- Sent a live test SMS via the Twilio API directly — confirmed `status:
+  delivered` by fetching the message back by SID (not just trusting the
+  "queued" response).
+- Then ran the same test through the actual Flask app (`curl -X POST
+  /contact`) — lead saved to SQLite *and* the SMS fired through
+  `app/notifications.py`, no errors in the server log.
+
+**What actually fixed it, in order:** (1) recreate the API Key as "Standard"
+type, not "Restricted" — fixes permission errors; (2) copy the Account SID
+from the Console's "Live credentials" / Account Info panel, which always
+starts with `AC`, never `SK`; (3) copy API Key SID and Secret together from
+the same key-creation screen, never mix values from two different keys;
+(4) confirm `FROM` and `TO` numbers are different — the `FROM` number must
+be a number *owned in the Twilio account*, not a personal cell.
+
+**Total time on this:** most of one session, almost entirely spent on
+Twilio Console navigation and credential mismatches, not on the ~40 lines
+of Python in `notifications.py` itself. Worth remembering next time: the
+code was right on the first try; the credentials took five attempts.
