@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Book a Demo — International ISA{% endblock %}
+{% block title %}Book Your Free Consultation — International ISA{% endblock %}
 {% block content %}
 <section class="page-header">
-  <h1>Book a Free Demo</h1>
-  <p class="lead">Tell us about your team and we'll follow up within one business day.</p>
+  <h1>Book Your Free Consultation</h1>
+  <p class="lead">Tell us about your business and we'll follow up within one business day.</p>
 </section>
 
 <form class="lead-form" method="post" action="{{ url_for('main.contact') }}">
@@ -16,12 +16,12 @@
   <label for="phone">Phone</label>
   <input type="tel" id="phone" name="phone">
 
-  <label for="brokerage">Brokerage / Team</label>
+  <label for="brokerage">Business / Company Name</label>
   <input type="text" id="brokerage" name="brokerage">
 
   <label for="message">What are you looking for help with?</label>
   <textarea id="message" name="message" rows="4"></textarea>
 
-  <button type="submit" class="cta-large">Request Demo</button>
+  <button type="submit" class="cta-large">Get Started Today</button>
 </form>
 {% endblock %}

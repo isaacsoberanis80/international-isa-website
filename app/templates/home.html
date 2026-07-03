@@ -1,42 +1,94 @@
 {% extends "base.html" %}
-{% block title %}International ISA — Inside Sales Agents for Realtors{% endblock %}
+{% block title %}International ISA — Back-Office & Sales Support for Growing Businesses{% endblock %}
 {% block content %}
 <section class="hero">
   <img class="hero-bg" src="https://images.unsplash.com/photo-1621255457330-7ef4e88ec27f?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="A sales professional in a modern office making a call on a smartphone" loading="eager">
-  <h1>More qualified leads. Less time on the phone.</h1>
-  <p class="lead">International ISA supplies trained, bilingual Inside Sales Agents who prospect, qualify, and nurture leads for your real estate team — so you spend your time closing, not cold calling.</p>
+  <h1>The Back-Office Team Behind Growing Businesses</h1>
+  <p class="lead">International ISA handles the sales calls, scheduling, and admin work for real estate agents, contractors, and service businesses — bilingual, professional, and built to help you scale without hiring.</p>
   <div class="hero-ctas">
-    <a class="cta-large" href="{{ url_for('main.contact') }}">Book a Free Demo</a>
-    <a class="cta-ghost" href="{{ url_for('main.services') }}">See How It Works</a>
+    <a class="cta-large" href="{{ url_for('main.contact') }}">Book Your Free Consultation</a>
+    <a class="cta-ghost" href="{{ url_for('main.about') }}">Learn More</a>
   </div>
   <div class="badges">
-    <span>Bilingual agents</span>
-    <span>Real-time lead alerts</span>
-    <span>Needs-based, not scripted</span>
+    <span>Bilingual: English &amp; Spanish</span>
+    <span>Real estate, construction &amp; trades</span>
+    <span>Scale without hiring</span>
   </div>
 </section>
 
-<section class="values reveal">
-  <div class="value-card">
-    <div class="icon-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M19 8v4M21 10h-4"/></svg>
+<section class="reveal">
+  <h2>What We Do</h2>
+  <p class="lead">International ISA provides comprehensive back-office and sales support for real estate agents, construction companies, plumbers, electricians, commercial businesses, and any service-based company ready to grow without the overhead of hiring in-house.</p>
+  <div class="services-grid" style="margin-top:28px;">
+    <div class="service-card">
+      <h3>Lead Management &amp; Sales Calls</h3>
+      <p>Bilingual agents (English &amp; Spanish) handle prospecting, qualification, and follow-up.</p>
     </div>
-    <h3>Leverage</h3>
-    <p>Add sales capacity without the cost or hassle of hiring and training in-house.</p>
-  </div>
-  <div class="value-card">
-    <div class="icon-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+    <div class="service-card">
+      <h3>Scheduling &amp; Database Maintenance</h3>
+      <p>Appointments booked, calendars kept current, and your CRM or database kept clean.</p>
     </div>
-    <h3>Quality</h3>
-    <p>Bilingual, needs-based agents who build real relationships with every lead — not scripts read off a page.</p>
+    <div class="service-card">
+      <h3>Listing &amp; Project Updates</h3>
+      <p>Listings, job statuses, and client-facing details kept accurate and up to date.</p>
+    </div>
+    <div class="service-card">
+      <h3>Quotations &amp; Purchase Orders</h3>
+      <p>Quotes and POs prepared and tracked, so nothing stalls waiting on paperwork.</p>
+    </div>
+    <div class="service-card">
+      <h3>Documentation &amp; Contracts</h3>
+      <p>Contract management and documentation handled with care and follow-through.</p>
+    </div>
+    <div class="service-card">
+      <h3>Customer Service</h3>
+      <p>A professional, bilingual point of contact for your customers, every time.</p>
+    </div>
   </div>
-  <div class="value-card">
+  <div class="image-band" style="margin-top:44px;">
+    <img src="https://images.unsplash.com/photo-1780733067347-3eb34d58f368?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="A business owner presenting growth results to colleagues in a modern office" loading="lazy">
+    <div class="caption">
+      <h2>You focus on strategy. We handle the rest.</h2>
+      <p>Labor, admin, and sales — off your plate. Save time, reduce costs, increase revenue, and scale without adding headcount.</p>
+    </div>
+  </div>
+</section>
+
+<section class="benefits reveal">
+  <div class="benefit-card">
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+    </div>
+    <h3>Save 15+ Hours a Week</h3>
+    <p>Get back the time you lose to admin work and sales calls every week.</p>
+  </div>
+  <div class="benefit-card">
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14M5 8a2 2 0 0 1-2-2 2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 1-2 2M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/></svg>
+    </div>
+    <h3>Bilingual, Qualified Agents</h3>
+    <p>Reach English- and Spanish-speaking customers without hiring separately for each.</p>
+  </div>
+  <div class="benefit-card">
     <div class="icon-badge">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11 13 15 21 7"/><path d="M15 7h6v6"/></svg>
     </div>
-    <h3>Results</h3>
-    <p>More appointments set, more deals closed, tracked and reported every step of the way.</p>
+    <h3>Scale Without Hiring</h3>
+    <p>Add capacity on demand — no payroll, benefits, or training overhead.</p>
+  </div>
+  <div class="benefit-card">
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <h3>Increase Revenue</h3>
+    <p>Professional lead management means fewer leads slip through the cracks.</p>
+  </div>
+  <div class="benefit-card">
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/></svg>
+    </div>
+    <h3>Focus on Strategy</h3>
+    <p>Spend your time growing the business, not running its daily operations.</p>
   </div>
 </section>
 
@@ -44,38 +96,49 @@
   <h2>How It Works</h2>
   <div class="steps">
     <div class="step">
-      <h3>Tell us about your team</h3>
-      <p>A quick call about your market, your lead sources, and what "qualified" means for you.</p>
+      <h3>Tell us about your business</h3>
+      <p>A quick call about your industry, your workload, and what's eating your time.</p>
     </div>
     <div class="step">
-      <h3>We match &amp; train your ISA</h3>
-      <p>A bilingual agent is onboarded on your scripts, your CRM, and your standards before day one.</p>
+      <h3>We match &amp; train your team</h3>
+      <p>A bilingual agent is onboarded on your process, your tools, and your standards.</p>
     </div>
     <div class="step">
-      <h3>Leads start flowing in</h3>
-      <p>Qualified conversations land on your calendar — you focus on showing up and closing.</p>
+      <h3>Work starts flowing through</h3>
+      <p>Calls answered, leads managed, admin handled — you focus on what's next.</p>
     </div>
   </div>
 </section>
 
 <section class="image-band reveal">
-  <img src="https://images.unsplash.com/photo-1482790197944-0bd99292659b?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Modern high-rise city skyline representing growth and ambition in real estate" loading="lazy">
+  <img src="https://images.unsplash.com/photo-1482790197944-0bd99292659b?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="Modern high-rise city skyline representing growth and ambition" loading="lazy">
   <div class="caption">
     <h2>Built for ambitious teams</h2>
-    <p>Whether you're closing luxury listings or scaling a growing brokerage, International ISA gives you the sales capacity to match your ambition.</p>
+    <p>Whether you're closing luxury listings, running job sites, or scaling a growing service business, International ISA gives you the support to match your ambition.</p>
   </div>
 </section>
 
-<section class="services-preview reveal">
-  <h2>What We Do</h2>
-  <ul>
-    <li>Full-time Inside Sales Agents (ISAs)</li>
-    <li>Cold calling &amp; prospecting</li>
-    <li>Lead management &amp; tracking</li>
-    <li>Live call transfers</li>
-    <li>Onboarding &amp; ongoing training</li>
-    <li>Lead nurturing &amp; follow-up</li>
-  </ul>
-  <a href="{{ url_for('main.services') }}">See all services &rarr;</a>
+<section class="reveal">
+  <h2>What Clients Are Saying</h2>
+  <p class="lead" style="margin-bottom:20px;">International ISA is newly launched — real client stories will go here as we take on our first partners. Ask us for references directly.</p>
+  <div class="testimonials">
+    <div class="testimonial-card">
+      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
+      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
+      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
+      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band reveal">
+  <h2>Ready to get your time back?</h2>
+  <a class="cta-large" href="{{ url_for('main.contact') }}">Get Started Today</a>
 </section>
 {% endblock %}
