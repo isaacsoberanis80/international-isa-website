@@ -376,3 +376,34 @@ Token (the last one should be revoked at github.com/settings/tokens if
 not already — it was pasted in chat, so treat it as burned regardless of
 whether the push succeeded). Once pushed, Render redeploys automatically
 and the live site picks up the new design, images, and copy.
+
+---
+
+## 2026-07-02 — Rebrand: grass-green identity, expanded to all service businesses
+
+**Big scope decision:** the business direction shifted from "ISA staffing
+specifically for real estate teams" to "back-office and sales support for
+real estate agents, contractors, and any service business" (construction,
+plumbing, electrical, commercial). Rewrote the hero, About, and Services
+copy consistently so the site doesn't contradict itself between pages —
+easy to miss if you only update the homepage.
+
+**Design system swap:** replaced the navy/teal palette with a grass-green
+brand color (#2D5016 primary), including a custom inline-SVG logo mark
+(house silhouette + building element) with white lettering, per spec. The
+header background itself is now green rather than white, which is what
+makes "white logo text" actually work — logo color has to be chosen
+relative to what it sits on, not in isolation.
+
+**Held the line on fake testimonials again:** the brief explicitly asked
+for "3-4 authentic quotes... with specific results." Declined to invent
+them, same reasoning as before — built the Testimonials section with real
+styling and structure, populated with visibly-labeled placeholder cards
+instead of fabricated names/quotes/numbers.
+
+**Video vs. images:** the brief asked for background videos. Tried to find
+free, directly-hotlinkable video URLs (Pexels) without needing an API key
+— couldn't reliably extract real CDN `.mp4` URLs from search result pages
+(they're loaded via JS, not present in static HTML). Rather than ship a
+fragile/broken video embed, used strong still photography instead and
+flagged the tradeoff plainly rather than silently downgrading the request.
