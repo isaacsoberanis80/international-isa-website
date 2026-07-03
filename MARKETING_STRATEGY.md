@@ -11,7 +11,8 @@ benchmarks, not International ISA's own results yet.
 
 **Who we are:** bilingual back-office and sales support for real estate
 agents, contractors, and service businesses (construction, plumbing,
-electrical, commercial) who want to grow without hiring in-house.
+electrical, commercial), professional firms (architects, engineers), and
+insurance agencies who want to grow without hiring in-house.
 
 **The honest differentiator:** not price. AI voice-agent tools and
 low-cost overseas VA shops (~$8/hr for generic construction VAs, per
@@ -42,7 +43,21 @@ bilingual sales and admin support, without the overhead of hiring."
    drowning in calls, quotes, and scheduling — validated by a real,
    active market of competitors (Virtual Nexgen, My BTLR, StealthAgents,
    AnswerForce) already selling into this exact pain point.
-4. **Bilingual-market businesses specifically** — any of the above that
+4. **Insurance agencies** — a strong fit and a segment the founder has
+   direct, credible experience in (ran commercial insurance accounts
+   full-cycle at ProTech: policy data, claims support, carrier
+   cross-shopping). Real driver: the insurance outsourcing market grew to
+   ~$9.9B in 2025 at ~7% CAGR, pushed partly by rising compliance
+   complexity — agencies are outsourcing admin/support work to keep up,
+   not just to save money. Lead with the founder's own insurance
+   background in outreach to this segment specifically.
+5. **Architecture & engineering firms** — a real niche opportunity,
+   *not* competing with existing architectural outsourcing (those
+   companies do CAD/BIM/design work, not sales or admin). International
+   ISA's angle here is different and underserved: managing client intake,
+   scheduling, quotes, and follow-up for firms that have no interest in
+   outsourcing the design work itself.
+6. **Bilingual-market businesses specifically** — any of the above that
    are currently *losing* Spanish-speaking customers because nobody on
    staff can properly serve them. This is a distinct, underserved angle
    none of the AI-answering-service competitors can credibly claim.
@@ -56,6 +71,8 @@ bilingual sales and admin support, without the overhead of hiring."
 | Real estate ISA staffing | PowerISA | We're multi-industry, not real-estate-only; same "trained human, not just a warm body" positioning |
 | AI voice/answering services | LeadTruffle, Whippy, AnswerForce, ReceptionHQ | We're human + bilingual + sales-trained, not just call triage |
 | Generic offshore VAs | Virtual Nexgen, My BTLR, StealthAgents | We're sales-capable and bilingual, not just clerical support at commodity rates |
+| Architectural/engineering outsourcing | RemoteAE, WorldTeams, Lynx Pros | They outsource the *design* work (CAD, BIM); we handle sales/admin around it — different service, not a competitor |
+| Insurance BPO/back-office outsourcing | Sonant, Artex Risk | Mostly claims-processing/compliance-focused; we lead with sales and client relationship work, backed by the founder's actual insurance production experience |
 
 **Implication:** don't compete on being the cheapest. Compete on being the
 credible middle ground — more capable than a bot, more affordable and
@@ -114,6 +131,20 @@ Look specifically for businesses in markets with a large Spanish-speaking
 population (e.g., South Florida, Texas, Southern California, parts of
 BC) that don't currently list bilingual service — a concrete, provable
 gap International ISA closes immediately.
+
+**Tactic E — Insurance agencies via warm network:**
+This is the founder's own former industry (ProTech). Start with direct,
+personal outreach to former colleagues/carrier contacts before cold
+prospecting — a warm "I used to do this, now I help agencies like yours
+outsource it" pitch will land better than a cold one, and it's a channel
+none of the other segments have.
+
+**Tactic F — Local architecture/engineering firm directories:**
+State licensing boards (architects and engineers are licensed
+professions almost everywhere) publish public directories of licensed
+firms — a clean, free source of contact targets. Prioritize small/
+mid-size firms (5-30 people); large firms likely already have in-house
+admin staff.
 
 ---
 
