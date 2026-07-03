@@ -51,6 +51,53 @@ specifically.
 
 ---
 
+## List C — RealTrends 2026 Verified high-volume teams (press-confirmed)
+
+Real, press-verified production numbers — strong fit, and 4 of these have
+confirmed contact info (see `International_ISA_CRM.xlsx`, High priority
+rows). Full details and drafts live in the spreadsheet, not duplicated
+here.
+
+| Team | Location | Signal |
+|---|---|---|
+| Ann Marie Chauss / Treasure Coast House Hunters | Port St. Lucie, FL | Top 1% FL team, $33.62M/58 sides — **contact info confirmed** |
+| Brian Caplicki / Caplicki Home Team | Middletown, NY | RealTrends Top Team by Volume, $27.47M/62 sides — **contact info confirmed** |
+| Whissel Realty Group | La Mesa/San Diego, CA | 1,042 sides/$875.9M — largest team found, also a Ylopo client — **contact info confirmed** |
+| Kaminsky Real Estate Group | Hermosa Beach, CA | #1 South Bay LA team, $440.5M — phone confirmed |
+| The Short Term Shop | Santa Rosa Beach, FL | 753 sides/$481M, vacation/STR niche |
+| Align | Hoboken, NJ | 1,009 sides/$644.3M |
+| Zac Nelson Team | Denver, CO | RealTrends Top Team by Volume |
+
+---
+
+## List D — Insurance agencies (real, verified)
+
+Full details and drafts in `International_ISA_CRM.xlsx`, "Insurance" tab.
+
+| Agency | Location | Signal | Contact Info |
+|---|---|---|---|
+| Bellido Insurance Brokerage, Inc. | Glendale, NY | Independent since 1983, currently hiring a bilingual (EN/ES) commercial Account Executive — they've already named the exact need | Confirmed |
+| Redberry Insurance Group | San Antonio, TX | Growing independent agency, hiring bilingual commercial producers | Phone confirmed |
+| Superior Insurance Partners (Noblesville, IN) | Indianapolis area | Hiring a bilingual Commercial Lines Account Manager | Phone confirmed, need a named contact |
+
+---
+
+## List E — Architecture & Engineering (harder segment — only 1 verified so far)
+
+| Firm | Location | Signal | Contact Info |
+|---|---|---|---|
+| Duvall Decker Architects, P.A. | Jackson, MS | 2026 AIA Architecture Firm Award winner (national recognition) — high-prestige target, but no confirmed hiring/admin-need signal, so this is a cold outreach on firm quality alone | Confirmed |
+
+**Note:** A&E was the hardest segment to source real, named leads with a
+clear signal — search kept surfacing generic "an architecture firm in
+[city]" results without names, and one name from an early search summary
+("AtGRA Design Studio") couldn't be verified on a direct follow-up search,
+so it was dropped rather than included on faith. **State licensing board
+directories (Tactic F in `MARKETING_STRATEGY.md`) are the better source
+for this segment** — worth doing by hand rather than relying on search.
+
+---
+
 ## How to keep this list alive
 
 1. **Re-run the searches monthly** — job postings and vendor client lists
@@ -61,6 +108,6 @@ specifically.
 3. **Log outcomes** — even "no response" or "not interested" is useful
    data; note it here or in the dashboard so you're not re-contacting the
    same dead end in 3 months.
-4. **This is real estate only.** Insurance, A&E, and trades lead-sourcing
-   still needs the same treatment — see Tactics C, E, F in
-   `MARKETING_STRATEGY.md` for where to look next.
+4. **Trades still needs the same treatment** — see Tactic C in
+   `MARKETING_STRATEGY.md` for where to look next (Angi/Thumbtack/Google
+   LSA directories).
