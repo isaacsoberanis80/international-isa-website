@@ -32,6 +32,16 @@ bilingual sales and admin support, without the overhead of hiring."
 
 ## 2. Target Segments (ranked by buyer-readiness)
 
+**Total addressable market is broader than any single list:** the actual
+qualifier is "does this business have sales calls, scheduling, quotes, or
+customer follow-up eating time?" — which is true of almost any
+service-based business, not just the verticals below. The named segments
+below are the **beachhead markets** — where outreach should focus first,
+because they're the easiest to reach and the pitch is sharpest — not a
+ceiling on who the site should welcome. Site copy reflects this: named
+verticals for conversion clarity, plus an explicit "don't see your
+industry? we still fit" line so nobody self-selects out.
+
 1. **Real estate teams/agents already spending on lead gen** — the
    clearest fit, closest to the original PowerISA-style model. Buyer-ready
    signal: coaches commonly recommend ~500+ active prospects in pipeline
