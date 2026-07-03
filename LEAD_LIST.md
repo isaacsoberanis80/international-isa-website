@@ -98,6 +98,22 @@ for this segment** — worth doing by hand rather than relying on search.
 
 ---
 
+## List F — Trades/contractors (real, verified)
+
+Full details and drafts in `International_ISA_CRM.xlsx`, "Trades" tab.
+All 4 are actively hiring dispatch/office/customer-service roles
+themselves — the same "they've already identified the need" signal as
+the real estate ISA postings.
+
+| Company | Location | Signal | Contact Info |
+|---|---|---|---|
+| Abacus Plumbing, Air Conditioning & Electrical | Houston, TX | 24-hr operation, 546+ reviews, hiring customer service across plumbing/HVAC/electrical | Phone confirmed |
+| Kansas City Plumbing Company (KCPC) | Kansas City, MO | 25 years in business, hiring Dispatch Coordinator + Office Administrator | Confirmed |
+| Dynamic Air Solutions | Louisville, KY | Founded 2019, fast-growing reputation, hiring HVAC Dispatcher | Phone confirmed |
+| Lozier Heating & Cooling | West Des Moines, IA | In business since 1906, 24/7, hiring Service Dispatcher | Phone confirmed |
+
+---
+
 ## How to keep this list alive
 
 1. **Re-run the searches monthly** — job postings and vendor client lists
