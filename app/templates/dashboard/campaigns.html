@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Clients — International ISA</title>
+  <title>Campaigns — International ISA</title>
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,9 @@
     th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
     tr:last-child td { border-bottom: none; }
     .add-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 8px; }
-    .add-form input, .add-form textarea { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; }
-    .add-form textarea { grid-column: span 2; }
+    .add-form input, .add-form select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; }
     .add-form button { grid-column: span 2; margin-top: 0; width: fit-content; }
+    .notice { background: var(--brand-lighter); border: 1px solid var(--brand-light); color: var(--brand); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -35,8 +35,11 @@
   </header>
 
   <main>
-    <h1 class="page-header">Clients</h1>
-    <p class="lead" style="font-size:15px;">New clients signed since launch only. Your 7 existing clients are tracked elsewhere and are never touched by this system.</p>
+    <h1 class="page-header">Ad Campaigns</h1>
+    <div class="notice">
+      Not connected to Meta or Google Ads yet -- this tracks campaigns manually for now.
+      See <code>docs/AD_CAMPAIGN_SETUP.md</code> in the repo for exactly what accounts to set up before this can pull real performance data automatically.
+    </div>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}<div class="flash">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
@@ -44,29 +47,28 @@
 
     <div class="panel">
       <form class="add-form" method="post">
-        <input type="text" name="name" placeholder="Client / business name" required>
-        <input type="text" name="industry" placeholder="Industry">
-        <input type="text" name="service_model" placeholder="Service model (e.g. AI Agent Bundle, Hourly, Revenue-share)">
-        <input type="text" name="monthly_value" placeholder="Monthly value">
-        <textarea name="notes" placeholder="Notes" rows="2"></textarea>
-        <button type="submit" class="cta-large">Add Client</button>
+        <input type="text" name="name" placeholder="Campaign name" required>
+        <select name="platform">
+          <option value="Meta">Meta</option>
+          <option value="Google Ads">Google Ads</option>
+        </select>
+        <input type="text" name="target_segment" placeholder="Target segment (e.g. Real Estate)">
+        <input type="text" name="budget" placeholder="Budget">
+        <button type="submit" class="cta-large">Add Campaign</button>
       </form>
     </div>
 
     <div class="panel">
       <table>
-        <tr><th>Name</th><th>Industry</th><th>Service Model</th><th>Monthly Value</th><th>Notes</th><th>Started</th></tr>
-        {% for c in clients %}
+        <tr><th>Name</th><th>Platform</th><th>Segment</th><th>Budget</th><th>Impressions</th><th>Clicks</th><th>Leads</th><th>Cost/Lead</th><th>Status</th></tr>
+        {% for c in campaigns %}
         <tr>
-          <td>{{ c.name }}</td>
-          <td>{{ c.industry }}</td>
-          <td>{{ c.service_model }}</td>
-          <td>{{ c.monthly_value }}</td>
-          <td>{{ c.notes }}</td>
-          <td>{{ c.started_at.strftime("%Y-%m-%d") if c.started_at else "" }}</td>
+          <td>{{ c.name }}</td><td>{{ c.platform }}</td><td>{{ c.target_segment }}</td>
+          <td>{{ c.budget }}</td><td>{{ c.impressions }}</td><td>{{ c.clicks }}</td>
+          <td>{{ c.leads_generated }}</td><td>{{ c.cost_per_lead }}</td><td>{{ c.status }}</td>
         </tr>
         {% else %}
-        <tr><td colspan="6">No new clients added yet.</td></tr>
+        <tr><td colspan="9">No campaigns yet.</td></tr>
         {% endfor %}
       </table>
     </div>

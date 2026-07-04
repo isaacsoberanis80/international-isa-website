@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
@@ -13,6 +15,9 @@ from .db import (
     update_prospect_lead_status,
     get_all_clients,
     add_client,
+    get_latest_morgan_summary,
+    get_all_ad_campaigns,
+    add_ad_campaign,
 )
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
@@ -46,8 +51,12 @@ def logout():
 def home():
     leads = get_all_leads()
     tasks = get_tasks_for_user(current_user.id)
+    morgan = get_latest_morgan_summary()
+    top_opportunities = json.loads(morgan.top_opportunities) if morgan and morgan.top_opportunities else []
+    metrics = json.loads(morgan.metrics_summary) if morgan and morgan.metrics_summary else {}
     return render_template(
-        "dashboard/home.html", leads=leads, tasks=tasks, statuses=LEAD_STATUSES
+        "dashboard/home.html", leads=leads, tasks=tasks, statuses=LEAD_STATUSES,
+        morgan=morgan, top_opportunities=top_opportunities, metrics=metrics,
     )
 
 
@@ -116,3 +125,18 @@ def clients():
         flash("Client added.")
         return redirect(url_for("dashboard.clients"))
     return render_template("dashboard/clients.html", clients=get_all_clients())
+
+
+@dashboard.route("/campaigns", methods=["GET", "POST"])
+@login_required
+def campaigns():
+    if request.method == "POST":
+        add_ad_campaign(
+            name=request.form["name"],
+            platform=request.form.get("platform", ""),
+            target_segment=request.form.get("target_segment", ""),
+            budget=request.form.get("budget", ""),
+        )
+        flash("Campaign added (draft -- not connected to a live ad platform yet).")
+        return redirect(url_for("dashboard.campaigns"))
+    return render_template("dashboard/campaigns.html", campaigns=get_all_ad_campaigns())

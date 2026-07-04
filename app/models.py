@@ -76,3 +76,52 @@ class Client(db.Model):
     monthly_value = db.Column(db.String(100))
     notes = db.Column(db.Text)
     started_at = db.Column(db.DateTime, default=now)
+
+
+class MorganDailySummary(db.Model):
+    """One row per day: the strategic read on the business, written by
+    Claude directly (same pattern as lead scoring -- no separate API key)."""
+
+    __tablename__ = "morgan_daily_summary"
+
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False, unique=True)
+    top_opportunities = db.Column(db.Text)  # JSON string
+    metrics_summary = db.Column(db.Text)  # JSON string
+    strategic_insight = db.Column(db.Text)
+    sms_sent = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=now)
+
+
+class MorganInteraction(db.Model):
+    """Log of questions asked of Morgan and its answers, once a live chat
+    interface exists (needs an Anthropic API key -- not wired up yet)."""
+
+    __tablename__ = "morgan_interactions"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_message = db.Column(db.Text, nullable=False)
+    morgan_response = db.Column(db.Text)
+    context = db.Column(db.Text)
+    recommendation_made = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, default=now)
+
+
+class AdCampaign(db.Model):
+    """Ad campaign tracking. Populated manually or via Meta/Google Ads API
+    integration once Isaac has developer accounts set up (see
+    docs/AD_CAMPAIGN_SETUP.md) -- not connected to a live ad platform yet."""
+
+    __tablename__ = "ad_campaigns"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    platform = db.Column(db.String(50))  # "Meta" or "Google Ads"
+    target_segment = db.Column(db.String(100))
+    budget = db.Column(db.String(50))
+    impressions = db.Column(db.Integer, default=0)
+    clicks = db.Column(db.Integer, default=0)
+    leads_generated = db.Column(db.Integer, default=0)
+    cost_per_lead = db.Column(db.String(50))
+    status = db.Column(db.String(50), nullable=False, default="Draft")
+    created_at = db.Column(db.DateTime, default=now)

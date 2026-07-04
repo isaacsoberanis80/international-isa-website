@@ -1,4 +1,4 @@
-from .models import db, Lead, User, Task, ProspectLead, Client
+from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, AdCampaign
 
 
 def save_lead(name, email, phone, brokerage, message):
@@ -82,3 +82,37 @@ def add_client(name, industry, service_model, monthly_value, notes):
     db.session.add(client)
     db.session.commit()
     return client
+
+
+def save_morgan_daily_summary(date, top_opportunities_json, metrics_summary_json,
+                               strategic_insight, sms_sent):
+    existing = MorganDailySummary.query.filter_by(date=date).first()
+    if existing:
+        existing.top_opportunities = top_opportunities_json
+        existing.metrics_summary = metrics_summary_json
+        existing.strategic_insight = strategic_insight
+        existing.sms_sent = sms_sent
+    else:
+        existing = MorganDailySummary(
+            date=date, top_opportunities=top_opportunities_json,
+            metrics_summary=metrics_summary_json,
+            strategic_insight=strategic_insight, sms_sent=sms_sent,
+        )
+        db.session.add(existing)
+    db.session.commit()
+    return existing
+
+
+def get_latest_morgan_summary():
+    return MorganDailySummary.query.order_by(MorganDailySummary.date.desc()).first()
+
+
+def get_all_ad_campaigns():
+    return AdCampaign.query.order_by(AdCampaign.created_at.desc()).all()
+
+
+def add_ad_campaign(name, platform, target_segment, budget):
+    campaign = AdCampaign(name=name, platform=platform, target_segment=target_segment, budget=budget)
+    db.session.add(campaign)
+    db.session.commit()
+    return campaign

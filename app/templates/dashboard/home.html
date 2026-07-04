@@ -71,6 +71,7 @@
       <a href="{{ url_for('dashboard.home') }}">Inbound Leads</a>
       <a href="{{ url_for('dashboard.prospects') }}">Prospects</a>
       <a href="{{ url_for('dashboard.clients') }}">Clients</a>
+      <a href="{{ url_for('dashboard.campaigns') }}">Campaigns</a>
       <span style="margin: 0 16px; color: var(--muted); font-size: 14px;">Hi, {{ current_user.username }}</span>
       <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
     </nav>
@@ -82,6 +83,29 @@
         <div class="flash">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>
       {% endif %}
     {% endwith %}
+
+    <h1 class="page-header">Morgan — Daily Insight</h1>
+    <div class="panel">
+      {% if morgan %}
+        <p style="margin: 0 0 10px; color: var(--muted); font-size: 13px;">{{ morgan.date }}</p>
+        <p style="margin: 0 0 14px; font-size: 15px;">{{ morgan.strategic_insight }}</p>
+        <div style="display:flex; gap: 24px; font-size: 14px; color: var(--muted); margin-bottom: 14px;">
+          <span><strong style="color: var(--brand);">{{ metrics.get('new_leads_today', 0) }}</strong> new leads today</span>
+          <span><strong style="color: var(--brand);">{{ metrics.get('total_leads', 0) }}</strong> total prospects</span>
+          <span><strong style="color: var(--brand);">{{ metrics.get('not_contacted', 0) }}</strong> not yet contacted</span>
+        </div>
+        {% if top_opportunities %}
+        <table>
+          <tr><th>Company</th><th>Score</th><th>Est. Value</th></tr>
+          {% for opp in top_opportunities %}
+          <tr><td>{{ opp.company }}</td><td>{{ opp.score }}/10</td><td>{{ opp.estimated_value }}</td></tr>
+          {% endfor %}
+        </table>
+        {% endif %}
+      {% else %}
+      <p style="color: var(--muted); margin: 0;">No daily summary yet — runs automatically each night, or trigger it manually with <code>python send_daily_summary.py</code>.</p>
+      {% endif %}
+    </div>
 
     <h1 class="page-header">Leads</h1>
     <div class="panel">
