@@ -158,3 +158,26 @@ from that table (not re-researching from scratch) is the fast, safe fix
 | As You Wish Electric, Plumbing, Heating & Air | Trades | Seattle, WA | Multi-trade contractor (electric + plumbing + HVAC), 172+ reviews, 24/7, urgently hiring a Customer Service Representative |
 
 Total leads as of this update: **31** across all 4 segments.
+
+---
+
+## 2026-07-04 — A&E segment reinforcement
+
+Focused another pass on Architecture-Engineering (still the weakest segment)
+using role-specific search angles (client-facing coordinator/admin hires)
+instead of generic "architecture firm in [city]" searches. One candidate
+from this pass (an anonymized Robert Half posting for "a renowned landscape
+architecture firm" in Downtown LA) was **dropped** — Robert Half posts on
+behalf of undisclosed clients and would not name the employer even on a
+direct follow-up fetch of the posting, so it fails the same verification
+bar that dropped "AtGRA Design Studio" earlier.
+
+| Company | Segment | Location | Signal | Contact Info |
+|---|---|---|---|---|
+| StructureCraft | Architecture-Engineering | Abbotsford, BC (+ remote East Coast US) | Structural engineering/mass-timber design-build firm (~200 staff), actively hiring 2 client-facing Project Coordinator roles | careers@structurecraft.com / +1 604-940-8889 |
+| Z.W. Jarosz Architect, P.A. | Architecture-Engineering | Miami (Coconut Grove), FL | ~30-person combined architecture + general contracting firm, award-winning (AIA, FL Builders Assoc.), actively hiring a full-time Administrative Assistant | info@jaroszarch.com / (305) 446-0888 |
+
+Both added to `International_ISA_CRM.xlsx` and the `ProspectLead` database
+table (scores 7 and 6). A&E now has **4** verified leads, up from 2.
+
+Total leads as of this update: **33** across all 4 segments.
