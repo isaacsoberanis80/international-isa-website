@@ -254,3 +254,25 @@ boards were already ruled out as unproductive, and generic firm searches
 keep surfacing aggregator noise instead of named companies.
 
 Total leads as of this update: **35** across all 4 segments.
+
+---
+
+## 2026-07-04 — More Real Estate leads (Tactic D: direct ISA postings)
+
+Went back to Tactic A/D (named teams with an active ISA job posting) for
+fresh names instead of re-mining Lists A/B/C.
+
+| Team | Location | Signal | Contact Info |
+|---|---|---|---|
+| The Adams Group (Real Broker) | Missouri City, TX (Fort Bend County/Houston) | RealTrends-verified team, 5 licensed agents, actively hiring ISA-related sales/admin roles | (832) 308-7633 |
+| Kerby & Cristina Real Estate Experts | Plymouth, MN (Twin Cities) | Premier team trusted by 7,000+ MN families, actively hiring a full-time ISA — direct, named opening | (763) 634-0073 |
+
+Both verified real via multiple independent sources (RealTrends, RE/MAX
+listings, Glassdoor career pages). Email addresses exist on both teams'
+sites but got masked/redacted by the fetch tool each time — worth a
+30-second manual check of `theadamsgrouptx.com/team` and
+`kerbyandcristina.com` to get the actual address before emailing.
+
+Real Estate now has **22** verified leads, up from 20.
+
+Total leads as of this update: **37** across all 4 segments.
