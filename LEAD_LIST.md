@@ -148,4 +148,13 @@ earlier version at one point (missing 3 of 4 sheets) partway through this
 work — cause unclear, but it was rebuilt cleanly from the `ProspectLead`
 database table, which was unaffected and is the authoritative source of
 truth for lead data. If the xlsx ever looks wrong again, rebuilding it
-from that table (not re-researching from scratch) is the fast, safe fix.
+from that table (not re-researching from scratch) is the fast, safe fix
+(`python rebuild_crm_from_db.py`).
+
+**Additional same-day find:**
+
+| Company | Segment | Location | Signal |
+|---|---|---|---|
+| As You Wish Electric, Plumbing, Heating & Air | Trades | Seattle, WA | Multi-trade contractor (electric + plumbing + HVAC), 172+ reviews, 24/7, urgently hiring a Customer Service Representative |
+
+Total leads as of this update: **31** across all 4 segments.
