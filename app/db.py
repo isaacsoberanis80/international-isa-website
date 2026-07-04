@@ -1,4 +1,13 @@
+import re
+
 from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, AdCampaign, now
+
+
+def _extract_dollar_amount(value):
+    if not value:
+        return None
+    match = re.search(r"\$?([\d,]+(?:\.\d+)?)", value)
+    return float(match.group(1).replace(",", "")) if match else None
 
 
 def save_lead(name, email, phone, brokerage, message):
@@ -83,6 +92,35 @@ def add_client(name, industry, service_model, monthly_value, notes):
     db.session.add(client)
     db.session.commit()
     return client
+
+
+def get_revenue_summary():
+    """Real revenue only, from signed clients. Prospect `estimated_value` is
+    the avoided-hire-cost pitched *to the prospect*, not revenue *to us* --
+    summing it as "pipeline value" would misrepresent what it means, so
+    prospects are only ever shown here as a status breakdown, never a
+    fabricated dollar total."""
+    clients = get_all_clients()
+    rows = []
+    total_mrr = 0.0
+    for c in clients:
+        amount = _extract_dollar_amount(c.monthly_value)
+        if amount is not None:
+            total_mrr += amount
+        rows.append({"client": c, "amount": amount})
+
+    prospects = get_all_prospect_leads()
+    status_counts = {}
+    for p in prospects:
+        status_counts[p.status] = status_counts.get(p.status, 0) + 1
+
+    return {
+        "rows": rows,
+        "total_mrr": total_mrr,
+        "client_count": len(clients),
+        "status_counts": status_counts,
+        "total_prospects": len(prospects),
+    }
 
 
 def save_morgan_daily_summary(date, top_opportunities_json, metrics_summary_json,

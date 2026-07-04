@@ -18,6 +18,7 @@ from .db import (
     get_latest_morgan_summary,
     get_all_ad_campaigns,
     add_ad_campaign,
+    get_revenue_summary,
 )
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
@@ -140,3 +141,9 @@ def campaigns():
         flash("Campaign added (draft -- not connected to a live ad platform yet).")
         return redirect(url_for("dashboard.campaigns"))
     return render_template("dashboard/campaigns.html", campaigns=get_all_ad_campaigns())
+
+
+@dashboard.route("/revenue")
+@login_required
+def revenue():
+    return render_template("dashboard/revenue.html", **get_revenue_summary())
