@@ -196,3 +196,35 @@ already on the list from 2026-07-02, so it wasn't re-added.)
 Insurance now has **5** verified leads, up from 4.
 
 Total leads as of this update: **34** across all 4 segments.
+
+---
+
+## 2026-07-04 — Contact info backfill (Real Estate)
+
+Shifted from finding new companies to making existing List A/B/C leads
+actually reachable — 15 of the 20 Real Estate leads had "Not yet found"
+contact info, which made them dead weight in the CRM. Filled in 4 of the
+strongest (by score):
+
+| Company | Contact Info Found |
+|---|---|
+| Matt Curtis Realty | info@mattcurtisrealestate.com / (256) 270-9393 |
+| At Your Home Sold Guaranteed Realty (TN) | 865-365-2280 (Kings of Real Estate Team) |
+| Velocity Realty | (619) 759-7833 (no public email) |
+| The Ryan & Brian Real Estate Team | Careers@RnBTeam.com / (855) 762-8326 |
+
+**Axis Real Estate Team** — confirmed real (active ISA job posting on
+WizeHire) but has no public phone/email, only an application funnel.
+Left as "Not yet found" rather than guessing — a WizeHire fetch claimed
+it's "also known as The Infinite Collective," but a direct check of that
+company's site never mentioned Axis, so that link wasn't trustworthy
+enough to use.
+
+**Central Texas Real Estate Investment Company** — could not verify as
+a specific, distinct real company. Several similarly-named Central TX
+firms exist (Central Texas Investors, Wildhorn Capital, Realty CTX) but
+none confirmed as a match. Flagged in the database notes as low-
+confidence — worth dropping if it can't be pinned down on a future pass.
+
+`PRIORITY_CALL_LIST.md` has the top-10 actionable leads with specific
+openers, kept up to date separately from this file.
