@@ -181,3 +181,18 @@ Both added to `International_ISA_CRM.xlsx` and the `ProspectLead` database
 table (scores 7 and 6). A&E now has **4** verified leads, up from 2.
 
 Total leads as of this update: **33** across all 4 segments.
+
+---
+
+## 2026-07-04 — Insurance segment addition
+
+| Company | Segment | Location | Signal | Contact Info |
+|---|---|---|---|---|
+| Frazier Insurance & Financial Services (Allstate) | Insurance | Las Vegas, NV | Established Allstate exclusive agency (since 2006) actively hiring a full-time bilingual (Spanish) Customer Service Representative for its growing team | (702) 648-8888 |
+
+(One other candidate from this pass — Superior Insurance Partners — was
+already on the list from 2026-07-02, so it wasn't re-added.)
+
+Insurance now has **5** verified leads, up from 4.
+
+Total leads as of this update: **34** across all 4 segments.
