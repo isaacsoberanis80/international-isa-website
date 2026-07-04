@@ -127,3 +127,25 @@ the real estate ISA postings.
 4. **Trades still needs the same treatment** — see Tactic C in
    `MARKETING_STRATEGY.md` for where to look next (Angi/Thumbtack/Google
    LSA directories).
+
+---
+
+## 2026-07-03 — Daily additions
+
+Found via a fresh research pass, focused especially on the A&E segment
+(previously the weakest, with only 1 verified lead).
+
+| Company | Segment | Location | Signal |
+|---|---|---|---|
+| Grumman\|Butkus Associates | Architecture-Engineering | Evanston, IL (+ Chicago, Madison, Milwaukee, NY) | Award-winning MEP/energy engineering firm, actively expanding (new offices, staff growth) — 2nd verified A&E lead |
+| Johns Agency, LLC (AAA Insurance) | Insurance | Loganville, GA | Top-performing AAA Exclusive Agency, currently hiring a bilingual (Spanish) P&C/Life producer themselves — same direct-need signal as Bellido |
+
+Both added to `International_ISA_CRM.xlsx` and the `ProspectLead` database
+table (scores 6 and 8 respectively — see the dashboard's Prospects page).
+
+**Note on this session:** the CRM Excel file was found reverted to an
+earlier version at one point (missing 3 of 4 sheets) partway through this
+work — cause unclear, but it was rebuilt cleanly from the `ProspectLead`
+database table, which was unaffected and is the authoritative source of
+truth for lead data. If the xlsx ever looks wrong again, rebuilding it
+from that table (not re-researching from scratch) is the fast, safe fix.
