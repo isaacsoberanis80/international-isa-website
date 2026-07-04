@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prospects — International ISA</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 16px 0 40px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 13.5px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+    tr:last-child td { border-bottom: none; }
+    select { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); font-family: inherit; font-size: 13px; background: var(--bg); }
+    .score { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; font-weight: 700; color: #fff; font-size: 13px; }
+    .score-high { background: var(--brand); }
+    .score-mid { background: var(--brand-light); }
+    .score-low { background: var(--muted); }
+    .filters { display: flex; gap: 12px; margin-bottom: 16px; }
+    .filters select { padding: 8px 12px; }
+    .muted-cell { color: var(--muted); font-size: 12.5px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="{{ url_for('dashboard.home') }}">International ISA — Team</a>
+    <nav>
+      <a href="{{ url_for('dashboard.home') }}">Inbound Leads</a>
+      <a href="{{ url_for('dashboard.prospects') }}">Prospects</a>
+      <a href="{{ url_for('dashboard.clients') }}">Clients</a>
+      <span style="margin: 0 16px; color: var(--muted); font-size: 14px;">Hi, {{ current_user.username }}</span>
+      <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-header">Prospect Research</h1>
+    <p class="lead" style="font-size:15px;">Outbound leads researched and scored (1-10) across real estate, insurance, architecture/engineering, and trades. Full drafts live in <code>International_ISA_CRM.xlsx</code>.</p>
+
+    <form class="filters" method="get">
+      <select name="industry" onchange="this.form.submit()">
+        <option value="">All industries</option>
+        {% for ind in industries %}
+        <option value="{{ ind }}" {% if ind == industry_filter %}selected{% endif %}>{{ ind }}</option>
+        {% endfor %}
+      </select>
+      <select name="status" onchange="this.form.submit()">
+        <option value="">All statuses</option>
+        {% for s in statuses %}
+        <option value="{{ s }}" {% if s == status_filter %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+      </select>
+    </form>
+
+    <div class="panel">
+      <table>
+        <tr>
+          <th>Score</th><th>Company</th><th>Industry</th><th>Location</th>
+          <th>Pain Point</th><th>Est. Value</th><th>Status</th>
+        </tr>
+        {% for lead in leads %}
+        <tr>
+          <td>
+            {% if lead.score >= 8 %}<span class="score score-high">{{ lead.score }}</span>
+            {% elif lead.score >= 6 %}<span class="score score-mid">{{ lead.score }}</span>
+            {% else %}<span class="score score-low">{{ lead.score }}</span>{% endif %}
+          </td>
+          <td><strong>{{ lead.company_name }}</strong><br><span class="muted-cell">{{ lead.contact_info }}</span></td>
+          <td>{{ lead.industry }}</td>
+          <td>{{ lead.location }}</td>
+          <td>{{ lead.pain_point }}</td>
+          <td>{{ lead.estimated_value }}</td>
+          <td>
+            <form method="post" action="{{ url_for('dashboard.set_prospect_status', lead_id=lead.id) }}">
+              <select name="status" onchange="this.form.submit()">
+                {% for s in statuses %}
+                <option value="{{ s }}" {% if s == lead.status %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+              </select>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7">No prospects match this filter.</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </main>
+</body>
+</html>

@@ -9,11 +9,16 @@ from .db import (
     add_task,
     get_tasks_for_user,
     complete_task,
+    get_all_prospect_leads,
+    update_prospect_lead_status,
+    get_all_clients,
+    add_client,
 )
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
 LEAD_STATUSES = ["New", "Contacted", "Qualified", "Closed"]
+PROSPECT_STATUSES = ["Not Contacted", "Contacted", "Follow-Up Needed", "Interested", "Not Interested", "Closed-Won"]
 
 
 @dashboard.route("/login", methods=["GET", "POST"])
@@ -69,3 +74,45 @@ def create_task():
 def finish_task(task_id):
     complete_task(task_id, current_user.id)
     return redirect(url_for("dashboard.home"))
+
+
+@dashboard.route("/prospects")
+@login_required
+def prospects():
+    industry_filter = request.args.get("industry", "")
+    status_filter = request.args.get("status", "")
+    leads = get_all_prospect_leads()
+    industries = sorted({l.industry for l in leads if l.industry})
+    if industry_filter:
+        leads = [l for l in leads if l.industry == industry_filter]
+    if status_filter:
+        leads = [l for l in leads if l.status == status_filter]
+    return render_template(
+        "dashboard/prospects.html", leads=leads, statuses=PROSPECT_STATUSES,
+        industries=industries, industry_filter=industry_filter, status_filter=status_filter,
+    )
+
+
+@dashboard.route("/prospects/<int:lead_id>/status", methods=["POST"])
+@login_required
+def set_prospect_status(lead_id):
+    status = request.form["status"]
+    if status in PROSPECT_STATUSES:
+        update_prospect_lead_status(lead_id, status)
+    return redirect(url_for("dashboard.prospects"))
+
+
+@dashboard.route("/clients", methods=["GET", "POST"])
+@login_required
+def clients():
+    if request.method == "POST":
+        add_client(
+            name=request.form["name"],
+            industry=request.form.get("industry", ""),
+            service_model=request.form.get("service_model", ""),
+            monthly_value=request.form.get("monthly_value", ""),
+            notes=request.form.get("notes", ""),
+        )
+        flash("Client added.")
+        return redirect(url_for("dashboard.clients"))
+    return render_template("dashboard/clients.html", clients=get_all_clients())

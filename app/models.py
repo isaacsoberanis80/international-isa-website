@@ -40,3 +40,39 @@ class Task(db.Model):
     description = db.Column(db.Text, nullable=False)
     done = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, default=now)
+
+
+class ProspectLead(db.Model):
+    """Outbound prospecting leads researched by the daily lead-gen process.
+    Distinct from `Lead`, which is inbound leads submitted via the public
+    contact form."""
+
+    __tablename__ = "prospect_leads"
+
+    id = db.Column(db.Integer, primary_key=True)
+    company_name = db.Column(db.String(200), nullable=False)
+    industry = db.Column(db.String(100))
+    location = db.Column(db.String(150))
+    contact_info = db.Column(db.Text)
+    pain_point = db.Column(db.Text)
+    estimated_value = db.Column(db.String(100))
+    solution_fit = db.Column(db.Text)
+    score = db.Column(db.Integer)
+    status = db.Column(db.String(50), nullable=False, default="Not Contacted")
+    date_added = db.Column(db.DateTime, default=now)
+
+
+class Client(db.Model):
+    """New clients signed since the website launched. Deliberately separate
+    from the business's 7 pre-existing clients, whose records live outside
+    this system entirely and are never touched here."""
+
+    __tablename__ = "clients"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    industry = db.Column(db.String(100))
+    service_model = db.Column(db.String(100))
+    monthly_value = db.Column(db.String(100))
+    notes = db.Column(db.Text)
+    started_at = db.Column(db.DateTime, default=now)

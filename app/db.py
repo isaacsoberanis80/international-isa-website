@@ -1,4 +1,4 @@
-from .models import db, Lead, User, Task
+from .models import db, Lead, User, Task, ProspectLead, Client
 
 
 def save_lead(name, email, phone, brokerage, message):
@@ -47,3 +47,38 @@ def complete_task(task_id, user_id):
     if task and task.user_id == user_id:
         task.done = True
         db.session.commit()
+
+
+def add_prospect_lead(company_name, industry, location, contact_info,
+                       pain_point, estimated_value, solution_fit, score):
+    lead = ProspectLead(
+        company_name=company_name, industry=industry, location=location,
+        contact_info=contact_info, pain_point=pain_point,
+        estimated_value=estimated_value, solution_fit=solution_fit, score=score,
+    )
+    db.session.add(lead)
+    db.session.commit()
+    return lead
+
+
+def get_all_prospect_leads():
+    return ProspectLead.query.order_by(ProspectLead.score.desc()).all()
+
+
+def update_prospect_lead_status(lead_id, status):
+    lead = db.session.get(ProspectLead, lead_id)
+    if lead:
+        lead.status = status
+        db.session.commit()
+
+
+def get_all_clients():
+    return Client.query.order_by(Client.started_at.desc()).all()
+
+
+def add_client(name, industry, service_model, monthly_value, notes):
+    client = Client(name=name, industry=industry, service_model=service_model,
+                     monthly_value=monthly_value, notes=notes)
+    db.session.add(client)
+    db.session.commit()
+    return client
