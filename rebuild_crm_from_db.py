@@ -127,10 +127,11 @@ def main():
             next_action = "Send initial email" if email else "Find contact info, then send"
             industry_note = INDUSTRY_NOTES.get(lead.industry, "for your business")
 
+            last_contact = lead.last_contact_date.strftime("%Y-%m-%d") if lead.last_contact_date else ""
             row_data = [
                 "", lead.company_name, email, phone, "", notes, priority,
                 lead.status, lead.date_added.strftime("%Y-%m-%d") if lead.date_added else "",
-                "", next_action,
+                last_contact, next_action,
                 draft_email(lead.company_name, lead.pain_point, industry_note),
                 draft_text(lead.company_name),
             ]

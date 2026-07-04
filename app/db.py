@@ -1,4 +1,4 @@
-from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, AdCampaign
+from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, AdCampaign, now
 
 
 def save_lead(name, email, phone, brokerage, message):
@@ -69,6 +69,7 @@ def update_prospect_lead_status(lead_id, status):
     lead = db.session.get(ProspectLead, lead_id)
     if lead:
         lead.status = status
+        lead.last_contact_date = now()
         db.session.commit()
 
 

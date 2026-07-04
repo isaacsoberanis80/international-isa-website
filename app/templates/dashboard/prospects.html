@@ -61,7 +61,7 @@
       <table>
         <tr>
           <th>Score</th><th>Company</th><th>Industry</th><th>Location</th>
-          <th>Pain Point</th><th>Est. Value</th><th>Status</th>
+          <th>Pain Point</th><th>Est. Value</th><th>Status</th><th>Last Contact</th>
         </tr>
         {% for lead in leads %}
         <tr>
@@ -84,9 +84,10 @@
               </select>
             </form>
           </td>
+          <td class="muted-cell">{% if lead.last_contact_date %}{{ lead.last_contact_date.strftime('%Y-%m-%d') }}{% else %}—{% endif %}</td>
         </tr>
         {% else %}
-        <tr><td colspan="7">No prospects match this filter.</td></tr>
+        <tr><td colspan="8">No prospects match this filter.</td></tr>
         {% endfor %}
       </table>
     </div>
