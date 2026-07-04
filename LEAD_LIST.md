@@ -228,3 +228,29 @@ confidence — worth dropping if it can't be pinned down on a future pass.
 
 `PRIORITY_CALL_LIST.md` has the top-10 actionable leads with specific
 openers, kept up to date separately from this file.
+
+---
+
+## 2026-07-04 — Another pass on Insurance and A&E (weakest segments)
+
+Tried role-specific and press-release angles for both segments. A&E came
+up empty again this round — no new named firm cleared the verification
+bar (one candidate, "The Juris Agency," was checked directly and dropped:
+their own site shows no bilingual hiring signal, and the CA-based
+"bilingual sales producer" postings found under that name almost
+certainly belong to a different, unrelated company with a similar name).
+
+| Company | Segment | Location | Signal | Contact Info |
+|---|---|---|---|---|
+| Way Better Insurance, Inc. | Insurance | Fort Myers, FL (+ new Babcock Ranch office) | Independent SWFL agency actively expanding — opened a new office in June 2026, building a dedicated local team | (239) 210-7720 |
+
+Note: this one doesn't have a confirmed bilingual-hiring signal like most
+other leads on this list — it's included on the growth/expansion signal
+alone (same basis as Duvall Decker Architects), not a proven direct need.
+
+Insurance now has **6** verified leads, up from 5. A&E stays at **4** —
+genuinely the hardest segment to source from web search; state licensing
+boards were already ruled out as unproductive, and generic firm searches
+keep surfacing aggregator noise instead of named companies.
+
+Total leads as of this update: **35** across all 4 segments.
