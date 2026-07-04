@@ -407,3 +407,65 @@ free, directly-hotlinkable video URLs (Pexels) without needing an API key
 (they're loaded via JS, not present in static HTML). Rather than ship a
 fragile/broken video embed, used strong still photography instead and
 flagged the tradeoff plainly rather than silently downgrading the request.
+
+---
+
+## 2026-07-03 — External "complete build spec": Parts 1, 3, 4-lite, 2-scaffold
+
+Isaac brought in a large external spec (partly written by another AI) for
+a much bigger system: automated lead scoring, ad campaign automation, an
+admin dashboard, and "Morgan" (a strategic AI advisor/sales-closing
+agent). Built one part at a time, only what's achievable without new
+paid/credentialed accounts, per the spec's own instruction and my own
+judgment:
+
+- **Part 1 (lead research/scoring):** Added a `ProspectLead` table
+  (company_name, industry, location, contact_info, pain_point,
+  estimated_value, solution_fit, score 1-10, status, date_added), seeded
+  with all existing researched leads scored directly by Claude reasoning
+  — no separate Anthropic API key needed, since Claude Code already does
+  this analysis when researching leads day to day.
+- **Part 3 (dashboard):** Added `/dashboard/prospects` (scored, filterable
+  by industry/status) and `/dashboard/clients` (new clients only —
+  explicitly never the business's 7 pre-existing protected clients).
+- **Part 4 ("Morgan"), research/insight layer only:** Added
+  `MorganDailySummary`/`MorganInteraction` tables and a dashboard panel
+  showing the day's top opportunities and a strategic recommendation —
+  same no-new-API-key pattern. **Deliberately did not build the
+  autonomous sales-closing + payment-collection piece** the spec asked
+  for — flagged to Isaac as a real risk (an AI agent closing deals and
+  collecting payment on a brand-new business with zero review) rather
+  than building it quietly. Isaac didn't push back on that call.
+- **Part 2 (ad campaigns), scaffolding only:** Added an `AdCampaign` table
+  and `/dashboard/campaigns` page (works today as a manual tracker).
+  Researched and documented in `docs/AD_CAMPAIGN_SETUP.md` exactly what
+  Meta (business verification + app review, ~1-3 weeks realistic) and
+  Google Ads (Manager account + developer token application) require
+  before an automated connection is buildable — not started, needs
+  Isaac's own accounts.
+
+**A real mistake, twice now:** deleted `leads.db` out of habit before
+running the seed script, wiping the real dashboard login a second time
+(no client data lost either time — there wasn't any yet — but still
+careless given it happened once already). Added an explicit, permanent
+rule against this in the scheduled task's instructions and in memory.
+
+**A file-integrity incident, handled without re-doing the research:**
+partway through adding new leads, `International_ISA_CRM.xlsx` was found
+reverted to an earlier version — 3 of 4 sheets and 2 leads missing, cause
+unclear (possibly a sync/backup tool restoring an old copy — never fully
+diagnosed). Rather than re-research from scratch, rebuilt the file
+directly from the `ProspectLead` database table, which was unaffected and
+is the actual source of truth. Wrote `rebuild_crm_from_db.py` as a
+permanent tool for this — worth remembering that **the database, not the
+spreadsheet, is authoritative** going forward; the xlsx is just an export.
+
+**Extended autonomous work session:** Isaac asked to stop being asked
+clarifying questions and let the work continue while he was away. Used
+that time for safe, reversible, no-new-credential work: more verified
+lead research (found 2 new real leads, including finally cracking the
+weak Architecture-Engineering segment with a second one via an
+MEP/energy-engineering-firm-awards search angle instead of generic
+"architecture firm" searches, which had been a dead end), the CRM
+recovery above, and this documentation — nothing requiring a decision
+only Isaac could make.
