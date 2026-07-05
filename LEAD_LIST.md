@@ -371,3 +371,21 @@ keeping:
 Real Estate now has **27**, Insurance now has **7**.
 
 Total leads as of this update: **45** across all segments.
+
+---
+
+## 2026-07-05 — Daily additions (Trades, Real Estate, Insurance)
+
+Rotated search angles: Phoenix-metro trades dispatcher postings, Scottsdale/multi-market ISA-type real estate postings, and bilingual-producer postings at independent Allstate/State Farm agencies and multi-location Miami insurance agencies. Architecture/Engineering came up empty again this round — only unnamed aggregator postings ("a renowned landscape architecture firm," "a firm in Miami Gardens") surfaced, none independently verifiable to a real named company, so nothing was added for that segment today (still the hardest to source). Also checked and dropped: "Homeology Real Estate" (Sacramento — no confirmed active ISA-type posting despite being a real company) and "Jael Insurance Agency" (real and bilingual, but no confirmed current hiring signal).
+
+| Company | Segment | Location | Signal | Why it's a good fit |
+|---|---|---|---|---|
+| A Quality HVAC and Plumbing Services LLC | Trades | Goodyear, AZ (Phoenix metro) | Actively hiring CSR & Dispatcher with a $2,000 sign-on bonus; careers page confirms active team expansion | Direct, self-identified dispatch/admin capacity gap — same pattern as other Trades leads on this list |
+| ROC Real Estate Partners (Ramon Casaus / eXp Realty) | Real Estate | Scottsdale, AZ (+ Albuquerque, NM and Denver, CO) | Posted an Inside Sales Specialist role plus concurrent agent postings across 3 metros | Multi-market team actively building out — likely feeling the follow-up/coverage gap across time zones |
+| The Robinson Allstate Agency (Clarence Robinson) | Insurance | Arlington, TX | Simultaneously posted Spanish-speaking and Vietnamese-speaking bilingual producer roles; top performers reportedly earn $180K+ | High-earning agency actively building multilingual capacity — direct match for the bilingual-producer pitch |
+| Iris Lopez – State Farm Insurance Agent | Insurance | Miami, FL | Hiring Customer Relations Representative and Account Associate (lead development, scheduling) | Strong bilingual-market fit (Miami) even without an explicit bilingual line in the posting |
+| UniVista Insurance | Insurance | Miami, FL (multiple locations) | Actively posting for a Bilingual (English/Spanish) Customer Service Sales Representative, confirmed via two independent sources | Established multi-location agency with an explicit, named bilingual CSR need |
+
+All 5 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-8). Real Estate now has **28**, Insurance now has **10**, Trades now has **8**. A&E stays at **4**.
+
+Total leads as of this update: **50** across all segments.
