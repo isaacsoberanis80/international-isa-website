@@ -296,3 +296,34 @@ Cristina, Ryan & Brian) were already on the list, so not re-added.
 Real Estate now has **24** verified leads, up from 22.
 
 Total leads as of this update: **39** across all 4 segments.
+
+---
+
+## 2026-07-04 — Broadening beyond the 4 core verticals: property management (secretary/office-admin signal)
+
+Per Isaac's direction, search strategy widened past Real Estate/Insurance/
+Trades/A&E to any business showing a general office-support, cold-calling-
+sales, or phone-answering need — bilingual is never the search query itself,
+just a plus if it happens to overlap.
+
+| Company | Location | Signal | Contact Info |
+|---|---|---|---|
+| Dasmen Residential | Ramsey, NJ (HQ) — 15,000+ multifamily units across NE/SE/Midwest/Carolinas | Multifamily investment/asset management firm actively hiring a Secretary to support multiple HQ departments | (888) 583-3212 |
+
+Verified via dasmenresidential.com, Yelp, BBB, and Chamber of Commerce listings.
+
+Two other candidates from this pass were checked and dropped: a Brooklyn
+mold/environmental company (no specific named entity confirmed hiring) and
+Ordonez Media (real company, but no confirmed appointment-setter/cold-caller
+hiring signal directly from them).
+
+A further pass on call centers ("call center hiring humans to answer
+phones") and cold-calling/appointment-setter roles ("small business missing
+calls", "appointment setter hiring") turned up only vendor pages (answering
+services selling *to* businesses) and generic job-board aggregator listings
+— no new verifiable named company with an active hiring signal. Not added.
+
+Real Estate now has **25** verified leads (Property Management counted
+under this segment for CRM purposes), up from 24.
+
+Total leads as of this update: **40** across all segments.
