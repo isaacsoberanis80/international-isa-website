@@ -95,8 +95,7 @@ class MorganDailySummary(db.Model):
 
 
 class MorganInteraction(db.Model):
-    """Log of questions asked of Morgan and its answers, once a live chat
-    interface exists (needs an Anthropic API key -- not wired up yet)."""
+    """Log of questions asked of Morgan and its answers via the live chat."""
 
     __tablename__ = "morgan_interactions"
 

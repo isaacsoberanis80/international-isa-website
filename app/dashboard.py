@@ -19,7 +19,10 @@ from .db import (
     get_all_ad_campaigns,
     add_ad_campaign,
     get_revenue_summary,
+    save_morgan_interaction,
+    get_recent_morgan_interactions,
 )
+from .morgan import ask_morgan, is_configured as morgan_is_configured
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
@@ -147,3 +150,21 @@ def campaigns():
 @login_required
 def revenue():
     return render_template("dashboard/revenue.html", **get_revenue_summary())
+
+
+@dashboard.route("/morgan", methods=["GET", "POST"])
+@login_required
+def morgan_chat():
+    if request.method == "POST":
+        user_message = request.form.get("message", "").strip()
+        if user_message:
+            response_text, error = ask_morgan(user_message)
+            save_morgan_interaction(user_message, response_text or f"[Error] {error}")
+            if error:
+                flash(error)
+        return redirect(url_for("dashboard.morgan_chat"))
+    return render_template(
+        "dashboard/morgan.html",
+        interactions=get_recent_morgan_interactions(),
+        configured=morgan_is_configured(),
+    )

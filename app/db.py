@@ -1,6 +1,6 @@
 import re
 
-from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, AdCampaign, now
+from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, MorganInteraction, AdCampaign, now
 
 
 def _extract_dollar_amount(value):
@@ -144,6 +144,17 @@ def save_morgan_daily_summary(date, top_opportunities_json, metrics_summary_json
 
 def get_latest_morgan_summary():
     return MorganDailySummary.query.order_by(MorganDailySummary.date.desc()).first()
+
+
+def save_morgan_interaction(user_message, morgan_response):
+    interaction = MorganInteraction(user_message=user_message, morgan_response=morgan_response)
+    db.session.add(interaction)
+    db.session.commit()
+    return interaction
+
+
+def get_recent_morgan_interactions(limit=20):
+    return MorganInteraction.query.order_by(MorganInteraction.timestamp.desc()).limit(limit).all()
 
 
 def get_all_ad_campaigns():
