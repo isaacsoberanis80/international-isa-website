@@ -55,7 +55,7 @@ class ProspectLead(db.Model):
     location = db.Column(db.String(150))
     contact_info = db.Column(db.Text)
     pain_point = db.Column(db.Text)
-    estimated_value = db.Column(db.String(100))
+    estimated_value = db.Column(db.Text)
     solution_fit = db.Column(db.Text)
     score = db.Column(db.Integer)
     status = db.Column(db.String(50), nullable=False, default="Not Contacted")
