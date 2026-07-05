@@ -327,3 +327,29 @@ Real Estate now has **25** verified leads (Property Management counted
 under this segment for CRM purposes), up from 24.
 
 Total leads as of this update: **40** across all segments.
+
+---
+
+## 2026-07-04 — Profile-fit prospects (no hiring signal required)
+
+Per Isaac's direction: not every prospect needs a live "we're hiring"
+posting. A real, verified, named business that fits the service profile
+(high call volume, growth stage, owner-operator without dedicated admin/
+dispatch support) is worth calling even with no job posting found. These
+are flagged explicitly as **profile-fit, not confirmed-need** — the pitch
+has to earn the "why now," since there's no self-identified pain point to
+reference like the hiring-signal leads above.
+
+| Company | Location | Signal | Contact Info |
+|---|---|---|---|
+| Lakes Area Realty (Steve Havig) | Minneapolis / Twin Cities, MN | Founder/president of his own small brokerage, 40+ years in real estate, named a 2026 Top Producer by Minneapolis Area Realtors for most transactions | steve@lakesarearealty.com |
+| Element Plumbing, Heating & Air | St. George / Hurricane, UT | Family-owned (Jon & Jaimie Graham), voted Best of Southern Utah 2026, actively expanding community presence and service area | (435) 554-1330 / info@elementSTG.com |
+| Done Rite Services | Tucson, AZ | Family-owned (Jordan & Cary Benjamin), 221+ Yelp reviews, 4.9-star Google rating, 2026 BBB Torch Award for Ethics, 24-hour multi-trade operation | (520) 369-3966 / info@doneritesvcs.com |
+
+All three verified real via multiple independent sources (company site,
+Yelp, BBB, LinkedIn, local press) before adding — same verification bar as
+every other lead on this list, just without a job-posting signal attached.
+
+Real Estate now has **26** verified leads, Trades now has **7**.
+
+Total leads as of this update: **43** across all segments.
