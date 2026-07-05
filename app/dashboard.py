@@ -21,6 +21,7 @@ from .db import (
     get_revenue_summary,
     save_morgan_interaction,
     get_recent_morgan_interactions,
+    get_followups_due,
 )
 from .morgan import ask_morgan, is_configured as morgan_is_configured
 
@@ -61,6 +62,7 @@ def home():
     return render_template(
         "dashboard/home.html", leads=leads, tasks=tasks, statuses=LEAD_STATUSES,
         morgan=morgan, top_opportunities=top_opportunities, metrics=metrics,
+        followups_due=get_followups_due(),
     )
 
 

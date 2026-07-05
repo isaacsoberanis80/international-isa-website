@@ -1,4 +1,5 @@
 import re
+from datetime import timezone
 
 from .models import db, Lead, User, Task, ProspectLead, Client, MorganDailySummary, MorganInteraction, AdCampaign, now
 
@@ -72,6 +73,34 @@ def add_prospect_lead(company_name, industry, location, contact_info,
 
 def get_all_prospect_leads():
     return ProspectLead.query.order_by(ProspectLead.score.desc()).all()
+
+
+def get_followups_due():
+    """Follow-ups due per the cadence in LEAD_WORKFLOW.md (Day 1 / 4 / 10),
+    approximated from status + last_contact_date since there's no explicit
+    touch counter. Excludes closed-out leads (Closed-Won, Not Interested)."""
+    active = ProspectLead.query.filter(
+        ProspectLead.status.notin_(["Closed-Won", "Not Interested"])
+    ).all()
+
+    due = []
+    for lead in active:
+        if lead.status == "Not Contacted":
+            due.append({"lead": lead, "reason": "Never contacted -- send Day 1 email"})
+        elif lead.status == "Follow-Up Needed":
+            due.append({"lead": lead, "reason": "They responded -- needs a reply"})
+        elif lead.status == "Contacted" and lead.last_contact_date:
+            last_contact = lead.last_contact_date
+            if last_contact.tzinfo is None:
+                last_contact = last_contact.replace(tzinfo=timezone.utc)
+            days_since = (now() - last_contact).days
+            if days_since >= 9:
+                due.append({"lead": lead, "reason": f"{days_since}d since last contact -- Day 10 final follow-up"})
+            elif days_since >= 3:
+                due.append({"lead": lead, "reason": f"{days_since}d since last contact -- Day 4 follow-up"})
+
+    due.sort(key=lambda d: d["lead"].score, reverse=True)
+    return due
 
 
 def update_prospect_lead_status(lead_id, status):

@@ -86,6 +86,26 @@
       {% endif %}
     {% endwith %}
 
+    <h1 class="page-header">Follow-ups Due ({{ followups_due|length }})</h1>
+    <div class="panel">
+      {% if followups_due %}
+      <table>
+        <tr><th>Score</th><th>Company</th><th>Industry</th><th>Reason</th><th>Contact Info</th></tr>
+        {% for item in followups_due %}
+        <tr>
+          <td>{{ item.lead.score }}</td>
+          <td><a href="{{ url_for('dashboard.prospects') }}">{{ item.lead.company_name }}</a></td>
+          <td>{{ item.lead.industry }}</td>
+          <td>{{ item.reason }}</td>
+          <td>{{ item.lead.contact_info }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p style="color: var(--muted); margin: 0;">Nothing due right now — everything's either freshly contacted or waiting on its next cadence date.</p>
+      {% endif %}
+    </div>
+
     <h1 class="page-header">Morgan — Daily Insight</h1>
     <div class="panel">
       {% if morgan %}
