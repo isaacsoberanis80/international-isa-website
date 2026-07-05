@@ -276,3 +276,23 @@ sites but got masked/redacted by the fetch tool each time — worth a
 Real Estate now has **22** verified leads, up from 20.
 
 Total leads as of this update: **37** across all 4 segments.
+
+---
+
+## 2026-07-04 — Two more Real Estate leads (LinkedIn/Zillow search angle)
+
+Searched via LinkedIn and Zillow-adjacent queries (public search, no login
+or scraping) for direct bilingual-hiring signals.
+
+| Team | Location | Signal | Contact Info |
+|---|---|---|---|
+| EmpowerHome Team Dallas | Fort Worth / DFW, TX | Actively hiring for **two** bilingual roles at once (Sales Agent + Listing Agent) | (703) 634-6615 |
+| High Performance Real Estate Advisors | Charlotte, NC (+ Upstate SC) | Growing Charlotte team, 100+ years combined agent experience, actively hiring a Bilingual (EN/ES) Real Estate Agent | marketing@hprea.com / (704) 228-3703 |
+
+Both verified real (multiple independent sources: Zillow profiles, Yelp,
+Facebook, company sites). Two other candidates from this pass (Kerby &
+Cristina, Ryan & Brian) were already on the list, so not re-added.
+
+Real Estate now has **24** verified leads, up from 22.
+
+Total leads as of this update: **39** across all 4 segments.
