@@ -353,3 +353,21 @@ every other lead on this list, just without a job-posting signal attached.
 Real Estate now has **26** verified leads, Trades now has **7**.
 
 Total leads as of this update: **43** across all segments.
+
+---
+
+## 2026-07-05 — First two leads found by Morgan (dashboard AI, new add_lead tool)
+
+Morgan (the dashboard chat advisor) gained web search plus the ability to
+add and update CRM leads directly. These two were found, verified, and
+added by Morgan during testing — then independently re-verified before
+keeping:
+
+| Company | Location | Signal | Contact Info |
+|---|---|---|---|
+| Melissa Greer Inc (BHHS Yost & Little Realty) | Greensboro, NC | Top Greensboro realtor (RealTrends Verified) hiring a real estate administrative assistant via WizeHire | (336) 337-5233 / melissagreer.com |
+| Justin Dillow – State Farm Agent | Muskego, WI | Established State Farm agency hiring a front-desk Receptionist (ZipRecruiter posting) | (262) 710-4533 / muskegoagent.com |
+
+Real Estate now has **27**, Insurance now has **7**.
+
+Total leads as of this update: **45** across all segments.
