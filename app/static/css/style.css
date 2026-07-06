@@ -1,12 +1,15 @@
 :root {
   --brand: #2d5016;
   --brand-light: #4f8a2f;
-  --brand-lighter: #eaf3e2;
+  --brand-lighter: #eef0dc;
+  --gold: #e8a13a;
+  --gold-bright: #f5c05a;
+  --gold-ink: #2b1d05;
   --ink: #1a1c1e;
-  --muted: #64665f;
-  --bg: #faf9f6;
-  --card: #ffffff;
-  --border: #e7e5de;
+  --muted: #6b6754;
+  --bg: #faf5ec;
+  --card: #fffdf8;
+  --border: #e8dfd0;
 }
 
 * { box-sizing: border-box; }
@@ -63,8 +66,8 @@ nav a {
 nav a:hover { color: #fff; }
 
 nav a.cta {
-  background: #fff;
-  color: var(--brand);
+  background: var(--gold-bright);
+  color: var(--gold-ink);
   padding: 10px 20px;
   border-radius: 999px;
   font-weight: 600;
@@ -73,7 +76,7 @@ nav a.cta {
 }
 
 nav a.cta:hover {
-  background: var(--brand-lighter);
+  background: #fff;
   transform: translateY(-1px);
 }
 
@@ -153,20 +156,20 @@ main {
 .cta-large {
   display: inline-block;
   margin-top: 28px;
-  background: var(--brand-light);
-  color: #fff;
+  background: var(--gold);
+  color: var(--gold-ink);
   text-decoration: none;
   padding: 15px 30px;
   border-radius: 999px;
-  font-weight: 600;
-  box-shadow: 0 8px 24px rgba(45, 80, 22, 0.35);
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(232, 161, 58, 0.4);
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .cta-large:hover {
-  background: var(--brand);
+  background: var(--gold-bright);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(45, 80, 22, 0.45);
+  box-shadow: 0 12px 28px rgba(232, 161, 58, 0.5);
 }
 
 .values {
@@ -249,8 +252,8 @@ main {
 }
 
 .cta-band h2 { color: #fff; margin-top: 0; }
-.cta-band .cta-large { background: #fff; color: var(--brand); box-shadow: none; }
-.cta-band .cta-large:hover { background: var(--brand-lighter); }
+.cta-band .cta-large { background: var(--gold-bright); color: var(--gold-ink); box-shadow: none; }
+.cta-band .cta-large:hover { background: #fff; }
 
 .page-header { margin-top: 48px; }
 
@@ -286,8 +289,8 @@ main {
 .lead-form input:focus,
 .lead-form textarea:focus {
   outline: none;
-  border-color: var(--brand-light);
-  box-shadow: 0 0 0 3px rgba(79, 138, 47, 0.15);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(232, 161, 58, 0.2);
 }
 
 .lead-form button {
@@ -423,8 +426,8 @@ main {
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background: var(--brand);
-  color: #fff;
+  background: var(--gold);
+  color: var(--gold-ink);
   font-family: "Sora", sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -490,7 +493,7 @@ main {
 .faq summary::after {
   content: "+";
   font-size: 20px;
-  color: var(--brand-light);
+  color: var(--gold);
   transition: transform 0.15s ease;
 }
 
@@ -515,10 +518,17 @@ main {
 
 .site-footer {
   text-align: center;
-  padding: 32px 24px;
+  padding: 36px 24px 32px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 13px;
   background: var(--brand);
+}
+
+.footer-logo {
+  width: 320px;
+  max-width: 85%;
+  display: block;
+  margin: 0 auto 14px;
 }
 
 @media (max-width: 640px) {

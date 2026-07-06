@@ -1,0 +1,36 @@
+<svg width="440" height="144" viewBox="0 0 440 144" xmlns="http://www.w3.org/2000/svg">
+  <!-- International ISA — full lockup (for white/light backgrounds) -->
+  <!-- box being carried -->
+  <rect x="30" y="6" width="52" height="32" rx="6" fill="#2D5016"/>
+  <line x1="40" y1="16" x2="72" y2="16" stroke="#9fd06a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="40" y1="24" x2="64" y2="24" stroke="#9fd06a" stroke-width="4" stroke-linecap="round"/>
+  <line x1="40" y1="32" x2="68" y2="32" stroke="#f5c05a" stroke-width="4" stroke-linecap="round"/>
+  <!-- arms -->
+  <path d="M34 62 C28 52 30 44 36 38" fill="none" stroke="#2D5016" stroke-width="5" stroke-linecap="round"/>
+  <path d="M56 66 C64 54 70 46 74 38" fill="none" stroke="#2D5016" stroke-width="5" stroke-linecap="round"/>
+  <!-- antenna -->
+  <path d="M28 62 C20 56 16 50 18 42" fill="none" stroke="#2D5016" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="18" cy="40" r="3.5" fill="#e8a13a"/>
+  <!-- head -->
+  <circle cx="34" cy="74" r="14" fill="#ffffff" stroke="#2D5016" stroke-width="5.5"/>
+  <circle cx="31" cy="72" r="3.5" fill="#0e120c"/>
+  <path d="M28 81 Q34 85 40 80" fill="none" stroke="#0e120c" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- thorax -->
+  <circle cx="58" cy="82" r="13" fill="#ffffff" stroke="#2D5016" stroke-width="5.5"/>
+  <!-- abdomen -->
+  <ellipse cx="86" cy="90" rx="17" ry="13" fill="#ffffff" stroke="#2D5016" stroke-width="5.5"/>
+  <!-- legs -->
+  <path d="M52 93 L44 110" stroke="#2D5016" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M62 94 L60 112" stroke="#2D5016" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M80 101 L74 116" stroke="#2D5016" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M92 101 L96 116" stroke="#2D5016" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- AI — the ground the ant walks on -->
+  <g transform="rotate(-2 60 132)">
+    <text x="44" y="134" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-style="italic" font-weight="700" letter-spacing="2.5" fill="#e8a13a">AI</text>
+    <line x1="70" y1="130" x2="92" y2="130" stroke="#e8a13a" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="24" y1="130" x2="38" y2="130" stroke="#e8a13a" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- wordmark -->
+  <text x="148" y="62" fill="#0e120c" font-family="Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="800" letter-spacing="0.5">INTERNATIONAL ISA</text>
+  <text x="148" y="90" fill="#2D5016" font-family="Helvetica Neue, Arial, sans-serif" font-size="13.5" font-weight="800" letter-spacing="3">AIM HIGHER. WE'VE GOT THE REST.</text>
+</svg>

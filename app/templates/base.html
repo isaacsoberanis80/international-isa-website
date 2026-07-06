@@ -13,12 +13,22 @@
 <body>
   <header class="site-header">
     <a class="logo" href="{{ url_for('main.home') }}">
-      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M4 17 16 7l12 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M7 15v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V15" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M13 27v-7a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 11V4h6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 4v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <svg viewBox="0 0 128 128" fill="none" aria-hidden="true">
+        <rect x="36" y="12" width="52" height="30" rx="6" fill="#f5c05a"/>
+        <line x1="46" y1="21" x2="78" y2="21" stroke="#2D5016" stroke-width="4" stroke-linecap="round"/>
+        <line x1="46" y1="29" x2="70" y2="29" stroke="#2D5016" stroke-width="4" stroke-linecap="round"/>
+        <line x1="46" y1="37" x2="74" y2="37" stroke="#2D5016" stroke-width="4" stroke-linecap="round"/>
+        <path d="M40 66 C34 56 36 48 42 42" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M62 70 C70 58 76 50 80 42" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="40" cy="78" r="14" stroke="#fff" stroke-width="6"/>
+        <circle cx="37" cy="76" r="3.5" fill="#fff"/>
+        <path d="M34 85 Q40 89 46 84" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="64" cy="86" r="13" stroke="#fff" stroke-width="6"/>
+        <ellipse cx="92" cy="94" rx="17" ry="13" stroke="#fff" stroke-width="6"/>
+        <path d="M58 97 L50 114" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M68 98 L66 116" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M86 105 L80 118" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M98 105 L102 118" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
       </svg>
       International ISA
     </a>
@@ -42,6 +52,7 @@
   </main>
 
   <footer class="site-footer">
+    <img src="{{ url_for('static', filename='img/logo-reversed.svg') }}" alt="International ISA — Aim higher. We've got the rest." class="footer-logo">
     <p>&copy; 2026 International ISA. Bilingual back-office &amp; sales support for real estate, construction, and service businesses.</p>
   </footer>
   <script src="{{ url_for('static', filename='js/reveal.js') }}"></script>
