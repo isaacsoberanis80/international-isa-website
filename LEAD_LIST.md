@@ -389,3 +389,20 @@ Rotated search angles: Phoenix-metro trades dispatcher postings, Scottsdale/mult
 All 5 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-8). Real Estate now has **28**, Insurance now has **10**, Trades now has **8**. A&E stays at **4**.
 
 Total leads as of this update: **50** across all segments.
+
+---
+
+## 2026-07-06 — Daily additions (Real Estate, Insurance, Trades)
+
+Rotated search angles again: a specific franchise-office ISA posting (rather than re-mining named teams), a multi-location Florida insurance agency's bilingual CSR hiring across two of its offices, and dispatcher postings at established (pre-2000-founded) plumbing/HVAC/electric contractors in two new metros (Denver, Raleigh). Architecture/Engineering came up empty again this round -- ENR's 2026 regional "Design Firm of the Year" winners (Beyer Blinder Belle, Treanor, PS&S, BKF, PAE) were all checked, but every one is a large multi-office firm well outside the 5-30 person target size, so none were added. Also checked and dropped: a Robert Half-style anonymized State Farm agent bilingual posting (Jessica Brock, Plano TX -- real agent, real opening, but no confirmed bilingual requirement on the actual posting) and Andy Mendoza State Farm (Helotes, TX -- Yelp listing shows the office as closed).
+
+| Company | Segment | Location | Signal | Why it's a good fit |
+|---|---|---|---|---|
+| 1st Class Real Estate - Great Neck | Real Estate | Virginia Beach, VA | This specific franchise office has an active, named Inside Sales Agent job posting | Direct, self-identified follow-up-capacity gap at a single growing office -- the clearest "skip the hire" pitch |
+| Florida One Insurance Agency | Insurance | Orlando / Tampa, FL (HQ Miami Lakes) | Actively hiring bilingual (English/Spanish) CSRs across multiple FL offices, confirmed via its own hiring portal | Named, direct bilingual-need signal at an established multi-location independent agency |
+| Done Plumbing, Heating, Cooling & Electrical | Trades/HVAC | Aurora / Denver, CO | 25+ year-old contractor actively hiring a Dispatcher/CSR ($21-25/hr) | Same self-identified call-handling/scheduling gap pattern as other Trades leads on this list |
+| Blanton's Air, Plumbing & Electric | Trades/HVAC | Raleigh, NC | 70+ year-old multi-trade contractor actively hiring a Dispatcher, with a dedicated recruiting email | Long-established, growing operation with a direct, named scheduling-coordination need |
+
+All 4 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-7). Real Estate now has **29**, Insurance now has **11**, Trades now has **10**. A&E stays at **4**.
+
+Total leads as of this update: **54** across all segments.
