@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-{% block title %}International ISA — Back-Office & Sales Support for Growing Businesses{% endblock %}
+{% block title %}Inside Sales Agents (ISA) & Back-Office Support for Real Estate and Service Businesses — International ISA{% endblock %}
+{% block meta_description %}Hire a trained inside sales agent (ISA) instead of a $45K employee. Lead follow-up, appointment setting, scheduling, and admin for real estate teams, trades, and service businesses — $18/hour, month-to-month.{% endblock %}
 {% block content %}
 <section class="hero">
   <img class="hero-bg" src="https://images.unsplash.com/photo-1621255457330-7ef4e88ec27f?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="A sales professional in a modern office making a call on a smartphone" loading="eager">
-  <h1>The Back-Office Team Behind Growing Businesses</h1>
-  <p class="lead">International ISA handles the sales calls, scheduling, and admin work for real estate agents, contractors, architects, engineers, insurance agencies, and service businesses — professional support built to help you scale without hiring.</p>
+  <h1>Your Inside Sales &amp; Back-Office Team — Without the Hire</h1>
+  <p class="lead">International ISA handles the sales calls, lead follow-up, scheduling, and admin work for real estate agents, contractors, architects, engineers, insurance agencies, and service businesses — trained professionals from $18/hour, so you scale without hiring.</p>
   <div class="hero-ctas">
     <a class="cta-large" href="{{ url_for('main.contact') }}">Book Your Free Consultation</a>
-    <a class="cta-ghost" href="{{ url_for('main.about') }}">Learn More</a>
+    <a class="cta-ghost" href="{{ url_for('main.services') }}">See Services &amp; Pricing</a>
   </div>
+  <p style="margin-top:10px; font-size:14px; opacity:0.85;">15 minutes, no commitment — we'll tell you honestly if we're not the right fit.</p>
   <div class="badges">
     <span>Real estate, trades &amp; professional firms</span>
-    <span>Scale without hiring</span>
+    <span>From $18/hour — no payroll, no benefits, no overhead</span>
     <span>Bilingual support available (EN/ES)</span>
   </div>
 </section>
@@ -120,20 +122,51 @@
 </section>
 
 <section class="reveal">
-  <h2>What Clients Are Saying</h2>
-  <p class="lead" style="margin-bottom:20px;">International ISA is newly launched — real client stories will go here as we take on our first partners. Ask us for references directly.</p>
-  <div class="testimonials">
-    <div class="testimonial-card">
-      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
-      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+  <h2>Simple, Transparent Pricing</h2>
+  <p class="lead">A full-time office hire costs $45,000+ a year once payroll, benefits, and training are counted. An International ISA agent covers the same desk for <strong>$18/hour</strong> — starting around $1,560/month at 20 hours a week, month-to-month, cancel anytime.</p>
+  <div class="benefits" style="margin-top:28px;">
+    <div class="benefit-card">
+      <h3>$18/hour, flat</h3>
+      <p>No payroll taxes, no benefits, no equipment, no recruiting fees. The rate on this page is the rate you pay.</p>
     </div>
-    <div class="testimonial-card">
-      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
-      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+    <div class="benefit-card">
+      <h3>Month-to-month</h3>
+      <p>No long contracts. If we're not earning our keep, you walk — that's on us to prevent.</p>
     </div>
-    <div class="testimonial-card">
-      <p class="quote placeholder">"Your client's story goes here — real results, in their own words."</p>
-      <div class="attribution"><strong>Add a name</strong>Business / Title</div>
+    <div class="benefit-card">
+      <h3>Founder-led service</h3>
+      <p>You deal directly with the founder, not an account queue. Questions get answered within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <h2>Honest by Default</h2>
+  <p class="lead">We're a newly launched company, so you won't find fake five-star reviews here. What you'll find instead: transparent pricing, a founder who picks up the phone, and a free consultation where we'll tell you plainly whether we can help. Real client stories will appear here as our first partners see results — and we'll gladly connect you with references as they come.</p>
+</section>
+
+<section class="reveal">
+  <h2>Frequently Asked Questions</h2>
+  <div class="steps">
+    <div class="step">
+      <h3>What does an inside sales agent (ISA) do?</h3>
+      <p>An ISA handles the sales conversations that eat your day: calling and qualifying new leads, following up until they're ready, setting appointments on your calendar, and keeping your CRM clean. You show up to booked appointments instead of chasing cold lists.</p>
+    </div>
+    <div class="step">
+      <h3>How much does it cost?</h3>
+      <p>$18/hour with a 20-hour weekly minimum — about $1,560/month. Compare that to $45,000+ a year for an in-house hire doing the same work.</p>
+    </div>
+    <div class="step">
+      <h3>Do you only work with real estate?</h3>
+      <p>Real estate teams are our specialty, but the same desk work exists everywhere — we support contractors, insurance agencies, architecture and engineering firms, property managers, and any business with calls to answer and leads to follow up.</p>
+    </div>
+    <div class="step">
+      <h3>Is support available in Spanish?</h3>
+      <p>Yes — our agents work English-first, and bilingual English/Spanish support is included at no extra charge when your market needs it.</p>
+    </div>
+    <div class="step">
+      <h3>How fast can we start?</h3>
+      <p>Days, not months. After the consultation we onboard your agent on your tools and scripts, and work starts flowing the same week.</p>
     </div>
   </div>
 </section>

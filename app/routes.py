@@ -1,9 +1,27 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, Response
 
 from .db import save_lead
 from .notifications import send_lead_notification
 
 main = Blueprint("main", __name__)
+
+BASE_URL = "https://internationalisa.com"
+
+
+@main.route("/robots.txt")
+def robots():
+    return Response(
+        f"User-agent: *\nAllow: /\nDisallow: /dashboard\nSitemap: {BASE_URL}/sitemap.xml\n",
+        mimetype="text/plain",
+    )
+
+
+@main.route("/sitemap.xml")
+def sitemap():
+    pages = ["/", "/services", "/about", "/contact"]
+    urls = "".join(f"<url><loc>{BASE_URL}{p}</loc></url>" for p in pages)
+    xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
+    return Response(xml, mimetype="application/xml")
 
 
 @main.route("/")
