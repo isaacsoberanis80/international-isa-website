@@ -406,3 +406,22 @@ Rotated search angles again: a specific franchise-office ISA posting (rather tha
 All 4 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-7). Real Estate now has **29**, Insurance now has **11**, Trades now has **10**. A&E stays at **4**.
 
 Total leads as of this update: **54** across all segments.
+
+---
+
+## 2026-07-08 — Daily additions (Real Estate, Insurance, Trades, and first A&E find in days)
+
+Rotated search angles again: named-team ISA postings via WizeHire in two new metros (Chicago, Las Vegas) instead of re-mining prior lists, independent State Farm agencies with explicit bilingual hiring language in Chicago, an established multi-decade Sacramento plumbing/HVAC contractor's dispatcher posting, and a fresh pass on Architecture-Engineering using a "named small firm with an admin/ops hiring signal" angle instead of awards lists (which kept surfacing only large multi-office firms outside the target size). That last angle finally broke A&E's dry streak. Checked and dropped this round: a San Antonio ISA-style posting from "Exquisite Properties LLC" (real but "no experience needed" boilerplate reads as a high-churn boiler-room listing, not a credible fit) and several generic ACEC/ENR award firms (WGI, LiRo, ECS) that were all confirmed too large (100+ staff, multi-office) for the target profile.
+
+| Company | Segment | Location | Signal | Why it's a good fit |
+|---|---|---|---|---|
+| Nicholas Ryan Team (Your Home Sold Guaranteed Realty) | Real Estate | Chicago, IL | Top 1% Chicago team (2018-2021) actively hiring an Inside Sales Agent via WizeHire | Named, direct ISA hiring signal -- the clearest "skip the hire" pitch |
+| Nathan Petrosian Real Estate Team (Realty One Group) | Real Estate | Las Vegas, NV | Fast-growing Realty One Group team actively hiring an ISA ($36K-$80K posted) | Direct hiring signal at a team scaling sub-teams and buyer's agents simultaneously |
+| Elvia Solis - State Farm Agent | Insurance | Pilsen, Chicago, IL | Established bilingual (EN/ES) agency (agent since 2006) actively hiring via its own careers page | Explicit, named bilingual need with confirmed phone contact |
+| Luke Harding - State Farm Insurance Agent | Insurance | Logan Square, Chicago, IL | Established agency (opened 2008) hiring an Agent Team Member role requiring bilingual Spanish | Same direct bilingual-producer fit as Elvia Solis, independently verified |
+| Bonney Plumbing, Electrical, Heating and Air | Trades/Plumbing | Sacramento, CA | 40+ year-old contractor actively hiring a Dispatcher ($20-25/hr posted) | Same self-identified call-handling/scheduling gap pattern as other Trades leads on this list |
+| Jensen Architects | Architecture-Engineering | San Francisco, CA | 30-35 person award-winning design firm hiring a Studio Operations Manager ($85-120K posted), cross-verified on 3 independent job boards | First new A&E lead in several days -- direct client/admin coordination hiring signal at a firm squarely in the 5-30(ish)-person target range |
+
+All 6 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-8). Real Estate now has **31**, Insurance now has **13**, Trades now has **11**, A&E now has **5**.
+
+Total leads as of this update: **60** across all segments.
