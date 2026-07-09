@@ -2,10 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "international-isa-web",
+      "name": "isa-web-5071",
       "runtimeExecutable": "venv/bin/python",
-      "runtimeArgs": ["run.py"],
-      "port": 5000
+      "runtimeArgs": [
+        "run.py"
+      ],
+      "port": 5071
     }
   ]
 }
