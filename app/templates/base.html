@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}International ISA{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Inside sales agents (ISA) and back-office support for real estate teams, trades, and service businesses. Calls answered, leads followed up, scheduling handled — from $18/hour, no hiring overhead.{% endblock %}">
+  <meta name="description" content="{% block meta_description %}Vancouver-based inside sales agents (ISA) and back-office support for real estate teams, trades, and service businesses across Canada and the US. Calls answered, leads followed up — from $18/hour.{% endblock %}">
   <link rel="canonical" href="https://internationalisa.com{{ request.path }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="International ISA">
@@ -18,9 +18,20 @@
     "@type": "ProfessionalService",
     "name": "International ISA",
     "url": "https://internationalisa.com",
-    "description": "Inside sales agents (ISA) and back-office support for real estate agents, contractors, insurance agencies, and service businesses. Lead follow-up, appointment setting, scheduling, quotes, and customer service.",
+    "description": "Vancouver-based inside sales agents (ISA) and back-office support for real estate agents, contractors, insurance agencies, and service businesses across Canada and the United States. Lead follow-up, appointment setting, scheduling, quotes, and customer service.",
     "priceRange": "$18/hour",
-    "areaServed": ["United States", "Canada"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vancouver",
+      "addressRegion": "BC",
+      "addressCountry": "CA"
+    },
+    "areaServed": [
+      {"@type": "City", "name": "Vancouver"},
+      {"@type": "AdministrativeArea", "name": "Greater Vancouver"},
+      {"@type": "Country", "name": "Canada"},
+      {"@type": "Country", "name": "United States"}
+    ],
     "knowsLanguage": ["en", "es"]
   }
   </script>
@@ -73,7 +84,7 @@
 
   <footer class="site-footer">
     <img src="{{ url_for('static', filename='img/logo-reversed.svg') }}" alt="International ISA — Aim higher. We've got the rest." class="footer-logo">
-    <p>&copy; 2026 International ISA. Bilingual back-office &amp; sales support for real estate, construction, and service businesses.</p>
+    <p>&copy; 2026 International ISA — based in Vancouver, BC, serving teams across Canada and the United States. Back-office &amp; sales support for real estate, construction, and service businesses (EN/ES).</p>
   </footer>
   <script src="{{ url_for('static', filename='js/reveal.js') }}"></script>
 </body>
