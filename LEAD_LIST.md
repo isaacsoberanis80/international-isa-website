@@ -425,3 +425,19 @@ Rotated search angles again: named-team ISA postings via WizeHire in two new met
 All 6 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 6-8). Real Estate now has **31**, Insurance now has **13**, Trades now has **11**, A&E now has **5**.
 
 Total leads as of this update: **60** across all segments.
+
+---
+
+## 2026-07-09 — Daily additions (Architecture-Engineering focus, one HVAC)
+
+Rotated angles: NCSEA/AIA state-chapter award winners (structural + AIA SC) instead of the ENR/ACEC lists mined in prior runs, plus a direct bilingual-HVAC-CSR job search. Checked and dropped: several PE roll-up platforms (Champions Group, Apex Service Partners, Pearl Street Capital) surfaced by trades searches -- confirmed real but are large consolidator-owned platforms, not the owner-operator profile this list targets.
+
+| Company | Segment | Location | Signal | Why it's a good fit |
+|---|---|---|---|---|
+| Rellaire Smart Home Systems | Trades/HVAC | Crystal Lake, IL | Actively hiring a bilingual (English/Spanish) HVAC customer service rep for nights/weekends, confirmed on its own careers page | Direct, self-identified bilingual call-coverage gap -- the clearest fit signal in this segment |
+| CKC Structural Engineers (Cary Kopczynski & Company) | Architecture-Engineering | Bellevue, WA / Chicago, IL | Just won the NCSEA 2025 Structural Engineering Excellence Award for The Ayer (Seattle), confirmed via NCSEA and local trade press | Named, verified award win signals a growing firm; angle is client intake/admin, not design work |
+| BOUDREAUX | Architecture-Engineering | Columbia, SC / Charlotte, NC | Named 2026 AIA South Carolina Firm Award recipient at its 50th anniversary | Verified, high-profile award at a two-studio firm with real client-intake volume distinct from design work |
+
+All 3 added to `International_ISA_CRM.xlsx` and the `ProspectLead` database table (scores 5-8). Trades now has **12**, A&E now has **7**.
+
+Total leads as of this update: **63** across all segments.
