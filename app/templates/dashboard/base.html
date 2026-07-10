@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Dashboard{% endblock %} — International ISA</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body class="dash">
+<div class="dash-wrap">
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard.home') }}">International ISA</a>
+    {% set nav = [
+      ('dashboard.home', 'Overview'),
+      ('dashboard.prospects', 'Prospects'),
+      ('dashboard.clients', 'Clients'),
+      ('dashboard.revenue', 'Revenue'),
+      ('dashboard.campaigns', 'Campaigns'),
+      ('dashboard.morgan_chat', 'Morgan AI'),
+    ] %}
+    {% for endpoint, label in nav %}
+    <a class="nav-item {% if request.endpoint == endpoint %}active{% endif %}" href="{{ url_for(endpoint) }}">
+      <span class="dot"></span>{{ label }}
+    </a>
+    {% endfor %}
+    <div class="spacer"></div>
+    <div class="user">{{ current_user.username }}</div>
+    <a class="logout" href="{{ url_for('dashboard.logout') }}">Log out</a>
+  </aside>
+
+  <main class="content">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<div class="flash">{% for m in messages %}<p style="margin:0;">{{ m }}</p>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/crm.js') }}"></script>
+</body>
+</html>

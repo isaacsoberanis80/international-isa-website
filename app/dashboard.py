@@ -62,7 +62,7 @@ def home():
     return render_template(
         "dashboard/home.html", leads=leads, tasks=tasks, statuses=LEAD_STATUSES,
         morgan=morgan, top_opportunities=top_opportunities, metrics=metrics,
-        followups_due=get_followups_due(),
+        followups_due=get_followups_due(), summary=get_revenue_summary(),
     )
 
 

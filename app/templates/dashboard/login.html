@@ -3,56 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Team Login — International ISA</title>
+  <title>Log In — International ISA</title>
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
   <style>
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(120% 160% at 50% -20%, #3d6b21 0%, var(--brand) 60%);
-    }
-    .login-card {
-      width: 100%;
-      max-width: 380px;
-      background: var(--card);
-      border-radius: 18px;
-      padding: 40px 36px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    }
-    .login-card .logo { justify-content: center; text-align: center; margin-bottom: 6px; font-size: 22px; color: var(--brand); }
-    .login-card .logo svg path { stroke: var(--brand); }
-    .login-card .lead { text-align: center; margin: 0 auto 24px; font-size: 14px; }
+    body { display:flex; align-items:center; justify-content:center; min-height:100vh; background: var(--brand); margin:0; }
+    .login-card { background: var(--card); border-radius: 12px; padding: 40px 36px; width: 340px; box-shadow: 0 30px 80px rgba(0,0,0,0.35); }
+    .login-card h1 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin: 0 0 4px; }
+    .login-card p { color: var(--muted); font-size: 13.5px; margin: 0 0 20px; }
+    .login-card label { font-size: 13px; font-weight: 600; display:block; margin: 12px 0 4px; }
+    .login-card input { width: 100%; box-sizing: border-box; padding: 11px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 14px; }
+    .login-card button { width: 100%; margin-top: 20px; }
   </style>
 </head>
 <body>
   <div class="login-card">
-    <a class="logo" href="{{ url_for('main.home') }}">
-      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" style="width:26px;height:26px;">
-        <path d="M4 17 16 7l12 10" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M7 15v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      International ISA
-    </a>
-    <p class="lead">Team dashboard</p>
+    <h1>International ISA</h1>
+    <p>Team dashboard</p>
     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash" style="background:#fcebeb;border-color:#e24b4a;color:#a32d2d;">
-          {% for message in messages %}<p>{{ message }}</p>{% endfor %}
-        </div>
-      {% endif %}
+      {% if messages %}<div class="flash">{% for m in messages %}{{ m }}{% endfor %}</div>{% endif %}
     {% endwith %}
-    <form class="lead-form" method="post">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit" class="cta-large" style="width:100%; text-align:center;">Log In</button>
+    <form method="post">
+      <label>Username</label>
+      <input type="text" name="username" required autofocus>
+      <label>Password</label>
+      <input type="password" name="password" required>
+      <button type="submit" class="btn">Log In</button>
     </form>
   </div>
 </body>

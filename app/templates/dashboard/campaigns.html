@@ -1,79 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Campaigns — International ISA</title>
-  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <style>
-    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 16px 0 40px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
-    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-    tr:last-child td { border-bottom: none; }
-    .add-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 8px; }
-    .add-form input, .add-form select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; }
-    .add-form button { grid-column: span 2; margin-top: 0; width: fit-content; }
-    .notice { background: var(--brand-lighter); border: 1px solid var(--brand-light); color: var(--brand); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <a class="logo" href="{{ url_for('dashboard.home') }}">International ISA — Team</a>
-    <nav>
-      <a href="{{ url_for('dashboard.home') }}">Inbound Leads</a>
-      <a href="{{ url_for('dashboard.prospects') }}">Prospects</a>
-      <a href="{{ url_for('dashboard.clients') }}">Clients</a>
-      <a href="{{ url_for('dashboard.campaigns') }}">Campaigns</a>
-      <a href="{{ url_for('dashboard.revenue') }}">Revenue</a>
-      <a href="{{ url_for('dashboard.morgan_chat') }}">Morgan</a>
-      <span style="margin: 0 16px; color: var(--muted); font-size: 14px;">Hi, {{ current_user.username }}</span>
-      <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
-    </nav>
-  </header>
+{% extends "dashboard/base.html" %}
+{% block title %}Campaigns{% endblock %}
+{% block content %}
+<h1>Ad Campaigns</h1>
+<p class="sub">Manual tracker for now — not yet connected to Meta or Google Ads (see docs/AD_CAMPAIGN_SETUP.md).</p>
 
-  <main>
-    <h1 class="page-header">Ad Campaigns</h1>
-    <div class="notice">
-      Not connected to Meta or Google Ads yet -- this tracks campaigns manually for now.
-      See <code>docs/AD_CAMPAIGN_SETUP.md</code> in the repo for exactly what accounts to set up before this can pull real performance data automatically.
-    </div>
+<div class="panel">
+  <h2>Add campaign</h2>
+  <form class="add-form" method="post">
+    <input type="text" name="name" placeholder="Campaign name" required>
+    <select name="platform">
+      <option value="Meta">Meta</option>
+      <option value="Google Ads">Google Ads</option>
+    </select>
+    <input type="text" name="target_segment" placeholder="Target segment (e.g. Real Estate)">
+    <input type="text" name="budget" placeholder="Budget">
+    <button type="submit" class="btn">Add Campaign</button>
+  </form>
+</div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}<div class="flash">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
-    {% endwith %}
-
-    <div class="panel">
-      <form class="add-form" method="post">
-        <input type="text" name="name" placeholder="Campaign name" required>
-        <select name="platform">
-          <option value="Meta">Meta</option>
-          <option value="Google Ads">Google Ads</option>
-        </select>
-        <input type="text" name="target_segment" placeholder="Target segment (e.g. Real Estate)">
-        <input type="text" name="budget" placeholder="Budget">
-        <button type="submit" class="cta-large">Add Campaign</button>
-      </form>
-    </div>
-
-    <div class="panel">
-      <table>
-        <tr><th>Name</th><th>Platform</th><th>Segment</th><th>Budget</th><th>Impressions</th><th>Clicks</th><th>Leads</th><th>Cost/Lead</th><th>Status</th></tr>
-        {% for c in campaigns %}
-        <tr>
-          <td>{{ c.name }}</td><td>{{ c.platform }}</td><td>{{ c.target_segment }}</td>
-          <td>{{ c.budget }}</td><td>{{ c.impressions }}</td><td>{{ c.clicks }}</td>
-          <td>{{ c.leads_generated }}</td><td>{{ c.cost_per_lead }}</td><td>{{ c.status }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="9">No campaigns yet.</td></tr>
-        {% endfor %}
-      </table>
-    </div>
-  </main>
-</body>
-</html>
+<div class="panel">
+  <table class="crm">
+    <thead><tr><th>Name</th><th>Platform</th><th>Segment</th><th>Budget</th><th>Impressions</th><th>Clicks</th><th>Leads</th><th>Cost/Lead</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for c in campaigns %}
+      <tr>
+        <td><strong>{{ c.name }}</strong></td><td>{{ c.platform }}</td><td>{{ c.target_segment }}</td>
+        <td>{{ c.budget }}</td><td>{{ c.impressions }}</td><td>{{ c.clicks }}</td>
+        <td>{{ c.leads_generated }}</td><td>{{ c.cost_per_lead }}</td><td>{{ c.status }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9" class="muted-cell">No campaigns yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,100 +1,41 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Revenue — International ISA</title>
-  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <style>
-    .panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin: 16px 0 40px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
-    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-    tr:last-child td { border-bottom: none; }
-    .notice { background: var(--brand-lighter); border: 1px solid var(--brand-light); color: var(--brand); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; }
-    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 16px 0 40px; }
-    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
-    .stat-card .value { font-family: "Sora", sans-serif; font-size: 28px; font-weight: 700; color: var(--brand); }
-    .stat-card .label { color: var(--muted); font-size: 13px; margin-top: 4px; }
-    .status-breakdown { display: flex; flex-wrap: wrap; gap: 10px; }
-    .status-pill { background: var(--brand-lighter); color: var(--brand); border-radius: 999px; padding: 6px 14px; font-size: 13px; }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <a class="logo" href="{{ url_for('dashboard.home') }}">International ISA — Team</a>
-    <nav>
-      <a href="{{ url_for('dashboard.home') }}">Inbound Leads</a>
-      <a href="{{ url_for('dashboard.prospects') }}">Prospects</a>
-      <a href="{{ url_for('dashboard.clients') }}">Clients</a>
-      <a href="{{ url_for('dashboard.campaigns') }}">Campaigns</a>
-      <a href="{{ url_for('dashboard.revenue') }}">Revenue</a>
-      <a href="{{ url_for('dashboard.morgan_chat') }}">Morgan</a>
-      <span style="margin: 0 16px; color: var(--muted); font-size: 14px;">Hi, {{ current_user.username }}</span>
-      <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
-    </nav>
-  </header>
+{% extends "dashboard/base.html" %}
+{% block title %}Revenue{% endblock %}
+{% block content %}
+<h1>Revenue</h1>
+<p class="sub">Only real, signed clients count toward MRR — nothing estimated or projected.</p>
 
-  <main>
-    <h1 class="page-header">Revenue</h1>
-    <div class="notice">
-      Only real, signed clients count toward MRR here — nothing is estimated or projected.
-      Prospect pipeline is shown as a status breakdown only, since a prospect's "estimated value"
-      is the cost <em>they'd</em> avoid by hiring us, not revenue to us, and summing that would
-      misrepresent actual pipeline value.
-    </div>
+<div class="kpis">
+  <div class="kpi gold"><div class="v">${{ "%.0f" | format(total_mrr) }}</div><div class="l">Total MRR</div></div>
+  <div class="kpi"><div class="v">{{ client_count }}</div><div class="l">New clients signed</div></div>
+  <div class="kpi"><div class="v">{{ total_prospects }}</div><div class="l">Prospects in pipeline</div></div>
+</div>
 
-    <div class="stat-grid">
-      <div class="stat-card">
-        <div class="value">${{ "%.0f"|format(total_mrr) }}</div>
-        <div class="label">Total MRR (signed clients)</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">{{ client_count }}</div>
-        <div class="label">New clients signed</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">{{ status_counts.get("Closed-Won", 0) }}</div>
-        <div class="label">Prospects closed-won</div>
-      </div>
-      <div class="stat-card">
-        <div class="value">{{ total_prospects }}</div>
-        <div class="label">Total prospects in pipeline</div>
-      </div>
-    </div>
+<div class="panel">
+  <h2>Pipeline by status</h2>
+  <div style="display:flex; flex-wrap:wrap; gap:10px;">
+    {% for status, count in status_counts.items() %}
+    <span class="status-pill st-{{ status | lower | replace(' ', '-') }}" style="border-radius:999px; padding:6px 14px; font-size:13px; font-weight:600;">{{ status }}: {{ count }}</span>
+    {% endfor %}
+  </div>
+  <p class="muted-cell" style="margin:14px 0 0;">Prospect "estimated value" is the hiring cost <em>they</em> avoid, not revenue to us — so pipeline is shown as counts, never invented dollars.</p>
+</div>
 
-    <div class="panel">
-      <h2 style="margin-top:0; font-size:16px;">Prospect pipeline by status</h2>
-      <div class="status-breakdown">
-        {% for status, count in status_counts.items() %}
-        <span class="status-pill">{{ status }}: {{ count }}</span>
-        {% else %}
-        <span>No prospects yet.</span>
-        {% endfor %}
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2 style="margin-top:0; font-size:16px;">Client revenue detail</h2>
-      <table>
-        <tr><th>Client</th><th>Service Model</th><th>Monthly Value</th><th>Parsed Amount</th><th>Started</th></tr>
-        {% for row in rows %}
-        <tr>
-          <td>{{ row.client.name }}</td>
-          <td>{{ row.client.service_model }}</td>
-          <td>{{ row.client.monthly_value }}</td>
-          <td>{{ "$%.0f"|format(row.amount) if row.amount is not none else "—" }}</td>
-          <td>{{ row.client.started_at.strftime("%Y-%m-%d") if row.client.started_at else "" }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="5">No clients signed yet — this fills in automatically as clients are added on the Clients page.</td></tr>
-        {% endfor %}
-      </table>
-    </div>
-  </main>
-</body>
-</html>
+<div class="panel">
+  <h2>Client revenue</h2>
+  <table class="crm">
+    <thead><tr><th>Client</th><th>Service Model</th><th>Monthly Value</th><th>Parsed MRR</th></tr></thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><strong>{{ row.client.name }}</strong></td>
+        <td>{{ row.client.service_model }}</td>
+        <td>{{ row.client.monthly_value }}</td>
+        <td>{% if row.amount is not none %}${{ "%.0f" | format(row.amount) }}{% else %}<span class="muted-cell">—</span>{% endif %}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="4" class="muted-cell">No client revenue yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

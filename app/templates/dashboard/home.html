@@ -1,182 +1,110 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard — International ISA</title>
-  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <style>
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 16px 0 40px;
-    }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 12px 8px; border-bottom: 1px solid var(--border); font-size: 14px; }
-    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
-    tr:last-child td { border-bottom: none; }
-    select {
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      font-family: inherit;
-      font-size: 13px;
-      background: var(--bg);
-    }
-    .task-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-    .task-row:last-child { border-bottom: none; }
-    .task-row.done .task-desc { text-decoration: line-through; color: var(--muted); }
-    .task-desc { flex: 1; }
-    .inline-form { display: inline; }
-    .task-row button, table button {
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      transition: background 0.15s ease;
-    }
-    .task-row button:hover { background: var(--bg); }
-    .task-add {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-    .task-add input {
-      flex: 1;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 14px;
-    }
-    .task-add button {
-      margin-top: 0;
-      padding: 10px 20px;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <a class="logo" href="{{ url_for('dashboard.home') }}">International ISA — Team</a>
-    <nav>
-      <a href="{{ url_for('dashboard.home') }}">Inbound Leads</a>
-      <a href="{{ url_for('dashboard.prospects') }}">Prospects</a>
-      <a href="{{ url_for('dashboard.clients') }}">Clients</a>
-      <a href="{{ url_for('dashboard.campaigns') }}">Campaigns</a>
-      <a href="{{ url_for('dashboard.revenue') }}">Revenue</a>
-      <a href="{{ url_for('dashboard.morgan_chat') }}">Morgan</a>
-      <span style="margin: 0 16px; color: var(--muted); font-size: 14px;">Hi, {{ current_user.username }}</span>
-      <a href="{{ url_for('dashboard.logout') }}" class="cta">Log Out</a>
-    </nav>
-  </header>
+{% extends "dashboard/base.html" %}
+{% block title %}Overview{% endblock %}
+{% block content %}
+<h1>Overview</h1>
+<p class="sub">Your pipeline at a glance</p>
 
-  <main>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>
-      {% endif %}
-    {% endwith %}
+<div class="kpis">
+  <div class="kpi"><div class="v">{{ summary.total_prospects }}</div><div class="l">Prospects</div></div>
+  <div class="kpi"><div class="v">{{ summary.status_counts.get('Not Contacted', 0) }}</div><div class="l">Not contacted</div></div>
+  <div class="kpi gold"><div class="v">{{ followups_due | length }}</div><div class="l">Follow-ups due</div></div>
+  <div class="kpi"><div class="v">{{ summary.client_count }}</div><div class="l">Clients</div></div>
+  <div class="kpi"><div class="v">${{ "%.0f" | format(summary.total_mrr) }}</div><div class="l">MRR</div></div>
+</div>
 
-    <h1 class="page-header">Follow-ups Due ({{ followups_due|length }})</h1>
-    <div class="panel">
-      {% if followups_due %}
-      <table>
-        <tr><th>Score</th><th>Company</th><th>Industry</th><th>Reason</th><th>Contact Info</th></tr>
-        {% for item in followups_due %}
-        <tr>
-          <td>{{ item.lead.score }}</td>
-          <td><a href="{{ url_for('dashboard.prospects') }}">{{ item.lead.company_name }}</a></td>
-          <td>{{ item.lead.industry }}</td>
-          <td>{{ item.reason }}</td>
-          <td>{{ item.lead.contact_info }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      {% else %}
-      <p style="color: var(--muted); margin: 0;">Nothing due right now — everything's either freshly contacted or waiting on its next cadence date.</p>
-      {% endif %}
-    </div>
-
-    <h1 class="page-header">Morgan — Daily Insight</h1>
-    <div class="panel">
-      {% if morgan %}
-        <p style="margin: 0 0 10px; color: var(--muted); font-size: 13px;">{{ morgan.date }}</p>
-        <p style="margin: 0 0 14px; font-size: 15px;">{{ morgan.strategic_insight }}</p>
-        <div style="display:flex; gap: 24px; font-size: 14px; color: var(--muted); margin-bottom: 14px;">
-          <span><strong style="color: var(--brand);">{{ metrics.get('new_leads_today', 0) }}</strong> new leads today</span>
-          <span><strong style="color: var(--brand);">{{ metrics.get('total_leads', 0) }}</strong> total prospects</span>
-          <span><strong style="color: var(--brand);">{{ metrics.get('not_contacted', 0) }}</strong> not yet contacted</span>
-        </div>
-        {% if top_opportunities %}
-        <table>
-          <tr><th>Company</th><th>Score</th><th>Est. Value</th></tr>
-          {% for opp in top_opportunities %}
-          <tr><td>{{ opp.company }}</td><td>{{ opp.score }}/10</td><td>{{ opp.estimated_value }}</td></tr>
-          {% endfor %}
-        </table>
-        {% endif %}
-      {% else %}
-      <p style="color: var(--muted); margin: 0;">No daily summary yet — runs automatically each night, or trigger it manually with <code>python send_daily_summary.py</code>.</p>
-      {% endif %}
-    </div>
-
-    <h1 class="page-header">Leads</h1>
-    <div class="panel">
-      <table>
-        <tr>
-          <th>Name</th><th>Email</th><th>Phone</th><th>Brokerage</th><th>Status</th><th>Received</th>
-        </tr>
-        {% for lead in leads %}
-        <tr>
-          <td>{{ lead.name }}</td>
-          <td>{{ lead.email }}</td>
-          <td>{{ lead.phone }}</td>
-          <td>{{ lead.brokerage }}</td>
-          <td>
-            <form class="inline-form" method="post" action="{{ url_for('dashboard.set_lead_status', lead_id=lead.id) }}">
-              <select name="status" onchange="this.form.submit()">
-                {% for s in statuses %}
-                <option value="{{ s }}" {% if s == lead.status %}selected{% endif %}>{{ s }}</option>
-                {% endfor %}
-              </select>
-            </form>
-          </td>
-          <td>{{ lead.created_at }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="6">No leads yet.</td></tr>
-        {% endfor %}
-      </table>
-    </div>
-
-    <h1 class="page-header">My Tasks</h1>
-    <div class="panel">
-      <form class="task-add" method="post" action="{{ url_for('dashboard.create_task') }}">
-        <input type="text" name="description" placeholder="Follow up with..." required>
-        <button type="submit">Add</button>
-      </form>
-      {% for task in tasks %}
-      <div class="task-row {% if task.done %}done{% endif %}">
-        <span class="task-desc">{{ task.description }}</span>
-        {% if not task.done %}
-        <form class="inline-form" method="post" action="{{ url_for('dashboard.finish_task', task_id=task.id) }}">
-          <button type="submit">Done</button>
-        </form>
-        {% endif %}
-      </div>
-      {% else %}
-      <p style="color: var(--muted); margin: 0;">No tasks yet.</p>
+<div class="panel">
+  <h2>Follow-ups due ({{ followups_due | length }})</h2>
+  {% if followups_due %}
+  <table class="crm">
+    <thead><tr><th>Score</th><th>Company</th><th>Reason</th><th>Contact</th></tr></thead>
+    <tbody>
+      {% for item in followups_due %}
+      <tr>
+        <td>
+          {% if item.lead.score >= 8 %}<span class="score score-high">{{ item.lead.score }}</span>
+          {% elif item.lead.score >= 6 %}<span class="score score-mid">{{ item.lead.score }}</span>
+          {% else %}<span class="score score-low">{{ item.lead.score }}</span>{% endif %}
+        </td>
+        <td><a href="{{ url_for('dashboard.prospects') }}" style="color:var(--brand); font-weight:600; text-decoration:none;">{{ item.lead.company_name }}</a></td>
+        <td class="muted-cell">{{ item.reason }}</td>
+        <td>
+          {% set phone = item.lead.contact_info | regex_phone %}
+          {% set email = item.lead.contact_info | regex_email %}
+          {% if phone %}<a class="contact-link" href="tel:{{ phone | replace(' ', '') }}">Call</a>{% endif %}
+          {% if email %}{% if phone %} · {% endif %}<a class="contact-link" href="mailto:{{ email }}">Email</a>{% endif %}
+        </td>
+      </tr>
       {% endfor %}
-    </div>
-  </main>
-</body>
-</html>
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted-cell" style="margin:0;">Nothing due right now.</p>
+  {% endif %}
+</div>
+
+{% if morgan %}
+<div class="panel">
+  <h2>Morgan — daily insight <span class="muted-cell" style="font-weight:400; font-size:12px;">{{ morgan.date }}</span></h2>
+  <p style="margin:0 0 12px; font-size:14.5px;">{{ morgan.strategic_insight }}</p>
+  {% if top_opportunities %}
+  <table class="crm">
+    <thead><tr><th>Top opportunity</th><th>Score</th><th>Est. value</th></tr></thead>
+    <tbody>
+      {% for opp in top_opportunities %}
+      <tr><td>{{ opp.company }}</td><td>{{ opp.score }}/10</td><td class="muted-cell">{{ opp.estimated_value }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="panel">
+  <h2>Inbound leads (website form)</h2>
+  <table class="crm">
+    <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Brokerage</th><th>Status</th><th>Received</th></tr></thead>
+    <tbody>
+      {% for lead in leads %}
+      <tr>
+        <td><strong>{{ lead.name }}</strong></td>
+        <td><a class="contact-link" href="mailto:{{ lead.email }}">{{ lead.email }}</a></td>
+        <td>{% if lead.phone %}<a class="contact-link" href="tel:{{ lead.phone }}">{{ lead.phone }}</a>{% endif %}</td>
+        <td>{{ lead.brokerage }}</td>
+        <td>
+          <form method="post" action="{{ url_for('dashboard.set_lead_status', lead_id=lead.id) }}">
+            <select name="status" class="status-pill st-{{ lead.status | lower | replace(' ', '-') }}" onchange="this.form.submit()">
+              {% for s in statuses %}
+              <option value="{{ s }}" {% if s == lead.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td class="muted-cell">{{ lead.created_at.strftime('%b %d, %H:%M') if lead.created_at else '' }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="6" class="muted-cell">No inbound leads yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>My tasks</h2>
+  <form class="task-add" method="post" action="{{ url_for('dashboard.create_task') }}">
+    <input type="text" name="description" placeholder="Follow up with…" required>
+    <button type="submit" class="btn">Add</button>
+  </form>
+  {% for task in tasks %}
+  <div class="task-row {% if task.done %}done{% endif %}">
+    <span class="task-desc">{{ task.description }}</span>
+    {% if not task.done %}
+    <form method="post" action="{{ url_for('dashboard.finish_task', task_id=task.id) }}">
+      <button type="submit">Done</button>
+    </form>
+    {% endif %}
+  </div>
+  {% else %}
+  <p class="muted-cell" style="margin:0;">No tasks yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

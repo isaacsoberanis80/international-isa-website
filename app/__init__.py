@@ -39,4 +39,16 @@ def create_app():
     from .dashboard import dashboard
     app.register_blueprint(dashboard)
 
+    import re
+
+    @app.template_filter("regex_phone")
+    def regex_phone(text):
+        m = re.search(r"\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}", text or "")
+        return m.group(0) if m else ""
+
+    @app.template_filter("regex_email")
+    def regex_email(text):
+        m = re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", text or "")
+        return m.group(0) if m else ""
+
     return app
