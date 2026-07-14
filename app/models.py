@@ -125,3 +125,45 @@ class AdCampaign(db.Model):
     cost_per_lead = db.Column(db.String(50))
     status = db.Column(db.String(50), nullable=False, default="Draft")
     created_at = db.Column(db.DateTime, default=now)
+
+
+class TruckerLead(db.Model):
+    """Dispatch-service prospects (owner-operator truckers). Separate from
+    ProspectLead because the workflow is different: multi-user contact
+    logging, WhatsApp-first, contract + document collection pipeline."""
+
+    __tablename__ = "trucker_leads"
+
+    id = db.Column(db.Integer, primary_key=True)
+    company_name = db.Column(db.String(200), nullable=False)
+    contact_name = db.Column(db.String(120))
+    phone = db.Column(db.String(30))
+    email = db.Column(db.String(120))
+    mc_number = db.Column(db.String(30))
+    dot_number = db.Column(db.String(30))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(10))
+    equipment = db.Column(db.String(60))  # dry van / reefer / flatbed
+    authority_date = db.Column(db.String(20))
+    language = db.Column(db.String(10), default="ES")
+    status = db.Column(db.String(40), nullable=False, default="Nuevo")
+    notes = db.Column(db.Text)
+    contract_token = db.Column(db.String(48))  # public download token
+    date_added = db.Column(db.DateTime, default=now)
+
+    logs = db.relationship("TruckerContactLog", backref="lead", lazy=True,
+                            order_by="TruckerContactLog.timestamp.desc()")
+
+
+class TruckerContactLog(db.Model):
+    """Every touch on a trucker lead: who, when, channel, note. Rows are
+    also written automatically by the WhatsApp webhook."""
+
+    __tablename__ = "trucker_contact_logs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    lead_id = db.Column(db.Integer, db.ForeignKey("trucker_leads.id"), nullable=False)
+    user = db.Column(db.String(60), nullable=False)  # isaac/ulises/manuel/roberto/whatsapp-bot
+    channel = db.Column(db.String(20), nullable=False)  # llamada/whatsapp/email/contrato/sistema
+    note = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, default=now)

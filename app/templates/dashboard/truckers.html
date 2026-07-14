@@ -1,0 +1,113 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Truckers{% endblock %}
+{% block content %}
+<h1>Dispatch — Truckers</h1>
+<p class="sub">Agencia familiar: cada llamada, WhatsApp o correo queda registrado con quién lo hizo. Sesión activa: <strong>{{ current_user.username }}</strong></p>
+
+<div class="toolbar">
+  <input type="search" placeholder="Buscar empresa, ciudad, MC…" data-table-search="#truckers-table">
+  <form method="get">
+    <select name="status" onchange="this.form.submit()">
+      <option value="">Todos los status</option>
+      {% for s in statuses %}
+      <option value="{{ s }}" {% if s == status_filter %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <span class="count" data-row-count></span>
+</div>
+
+<div class="panel">
+  <h2>Agregar lead</h2>
+  <form class="add-form" method="post" action="{{ url_for('dispatch.add_trucker') }}">
+    <input type="text" name="company_name" placeholder="Empresa *" required>
+    <input type="text" name="contact_name" placeholder="Nombre del trucker">
+    <input type="text" name="phone" placeholder="Teléfono (10 dígitos) *" required>
+    <input type="email" name="email" placeholder="Email">
+    <input type="text" name="mc_number" placeholder="MC# (sin MC-)">
+    <input type="text" name="dot_number" placeholder="DOT#">
+    <input type="text" name="city" placeholder="Ciudad">
+    <input type="text" name="equipment" placeholder="Equipo (dry van / reefer / flatbed)">
+    <textarea name="notes" placeholder="Notas" rows="2"></textarea>
+    <button type="submit" class="btn">Agregar</button>
+  </form>
+</div>
+
+<div class="panel">
+  <table class="crm" id="truckers-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="sortable">Empresa <span class="arrow">↕</span></th>
+        <th class="sortable">Ciudad <span class="arrow">↕</span></th>
+        <th>MC#</th>
+        <th>Contactar</th>
+        <th>Registrar</th>
+        <th>Status</th>
+        <th class="sortable">Último contacto <span class="arrow">↕</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for lead in leads %}
+      <tr>
+        <td><button class="expand-btn" title="Historial">▸</button></td>
+        <td><strong>{{ lead.company_name }}</strong>{% if lead.contact_name %}<br><span class="muted-cell">{{ lead.contact_name }}</span>{% endif %}</td>
+        <td class="muted-cell">{{ lead.city }}{% if lead.state %}, {{ lead.state }}{% endif %}</td>
+        <td class="muted-cell">{{ lead.mc_number }}</td>
+        <td style="white-space:nowrap;">
+          {% if lead.phone %}
+          <a class="contact-link" href="tel:+{{ lead.wa_number }}">📞 Llamar</a><br>
+          <a class="contact-link" href="https://wa.me/{{ lead.wa_number }}?text={{ templates.intro.format(name=lead.contact_name or 'amigo', user=current_user.username|capitalize) | urlencode }}" target="_blank">💬 WhatsApp</a><br>
+          {% if lead.contract_token %}
+          <a class="contact-link" href="https://wa.me/{{ lead.wa_number }}?text={{ templates.contrato.format(name=lead.contact_name or 'amigo', company=lead.company_name, contract_url='https://internationalisa.com' + url_for('dispatch.descargar_contrato', token=lead.contract_token)) | urlencode }}" target="_blank">📄 WhatsApp Contrato</a><br>
+          <a class="contact-link" href="https://wa.me/{{ lead.wa_number }}?text={{ templates.docs.format(name=lead.contact_name or 'amigo') | urlencode }}" target="_blank">📋 Pedir Docs</a><br>
+          {% endif %}
+          {% endif %}
+          {% if lead.email %}<a class="contact-link" href="mailto:{{ lead.email }}">✉️ Email</a>{% endif %}
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('dispatch.log_contact', lead_id=lead.id) }}" style="display:flex; gap:4px; flex-wrap:wrap; max-width:180px;">
+            <select name="channel" style="padding:4px 6px; border-radius:6px; border:1px solid var(--border); font-size:12px;">
+              <option value="llamada">Llamada</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="email">Email</option>
+            </select>
+            <input type="text" name="note" placeholder="Nota" style="width:80px; padding:4px 6px; border-radius:6px; border:1px solid var(--border); font-size:12px;">
+            <button type="submit" style="border:1px solid var(--border); background:#fff; border-radius:6px; padding:3px 8px; font-size:12px; cursor:pointer;">✓</button>
+          </form>
+          {% if not lead.contract_token %}
+          <form method="post" action="{{ url_for('dispatch.generar_contrato', lead_id=lead.id) }}" style="margin-top:4px;">
+            <button type="submit" style="border:none; background:var(--gold); color:var(--gold-ink); border-radius:6px; padding:4px 10px; font-size:11.5px; font-weight:600; cursor:pointer;">Generar contrato</button>
+          </form>
+          {% endif %}
+        </td>
+        <td>
+          <form method="post" action="{{ url_for('dispatch.set_status', lead_id=lead.id) }}">
+            <select name="status" class="status-pill st-{{ lead.status | lower | replace(' ', '-') }}" onchange="this.form.submit()">
+              {% for s in statuses %}
+              <option value="{{ s }}" {% if s == lead.status %}selected{% endif %}>{{ s }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td class="muted-cell">
+          {% if lead.logs %}{{ lead.logs[0].timestamp.strftime('%b %d %H:%M') }}<br>{{ lead.logs[0].user }} · {{ lead.logs[0].channel }}{% else %}—{% endif %}
+        </td>
+      </tr>
+      <tr class="detail-row" style="display:none;">
+        <td colspan="8">
+          <strong>Historial completo:</strong><br>
+          {% for log in lead.logs[:12] %}
+          {{ log.timestamp.strftime('%b %d %H:%M') }} — <strong>{{ log.user }}</strong> ({{ log.channel }}): {{ log.note }}<br>
+          {% else %}Sin contactos aún.{% endfor %}
+          {% if lead.notes %}<br><strong>Notas:</strong> {{ lead.notes }}{% endif %}
+          {% if lead.contract_token %}<br><strong>Contrato:</strong> <a href="{{ url_for('dispatch.descargar_contrato', token=lead.contract_token) }}" target="_blank">ver PDF</a>{% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8" class="muted-cell">Sin leads aún — agrégalos arriba o pídeme que importe el Excel.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

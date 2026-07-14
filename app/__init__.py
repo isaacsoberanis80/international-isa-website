@@ -39,6 +39,9 @@ def create_app():
     from .dashboard import dashboard
     app.register_blueprint(dashboard)
 
+    from .dispatch import dispatch_bp
+    app.register_blueprint(dispatch_bp)
+
     import re
 
     @app.template_filter("regex_phone")
