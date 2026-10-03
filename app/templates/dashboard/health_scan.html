@@ -1,0 +1,23 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Account Health Scan{% endblock %}
+{% block content %}
+<h1>Account Health Scan</h1>
+<p class="sub">Scans real client notes and tenure for risk or opportunity language. Honest limit: this system doesn't track usage or last-contact date, so it only flags what's actually written in notes — not a fabricated health score.</p>
+
+{% if not configured %}
+<div class="notice">Not configured — no Anthropic API key set.</div>
+{% endif %}
+
+<div class="panel">
+  <form method="post">
+    <button type="submit" class="btn">Scan accounts</button>
+  </form>
+</div>
+
+{% if report %}
+<div class="panel">
+  <h2>Results</h2>
+  <div style="white-space:pre-wrap; font-size:14.5px; line-height:1.6;">{{ report }}</div>
+</div>
+{% endif %}
+{% endblock %}

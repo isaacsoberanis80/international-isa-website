@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Objection Handler{% endblock %}
+{% block content %}
+<h1>Objection Handler</h1>
+<p class="sub">Give it the objection (and a competitor if one was named) — get a grounded response using our real pricing, never invented competitor claims.</p>
+
+{% if not configured %}
+<div class="notice">Not configured — no Anthropic API key set.</div>
+{% endif %}
+
+<div class="panel">
+  <form method="post" style="display:flex; gap:10px; flex-direction:column;">
+    <textarea name="objection_text" rows="3" placeholder="e.g. Your price is higher than a local staffing agency we talked to" style="padding:10px 12px; border-radius:8px; border:1px solid var(--border); font-size:14px; font-family:inherit;">{{ objection_text }}</textarea>
+    <input type="text" name="competitor" value="{{ competitor }}" placeholder="Competitor mentioned (optional)" style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); font-size:14px;">
+    <button type="submit" class="btn" style="align-self:flex-start;">Get response</button>
+  </form>
+</div>
+
+{% if response_text %}
+<div class="panel">
+  <h2>Response</h2>
+  <div style="white-space:pre-wrap; font-size:14.5px; line-height:1.6;">{{ response_text }}</div>
+</div>
+{% endif %}
+{% endblock %}

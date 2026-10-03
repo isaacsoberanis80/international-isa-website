@@ -23,6 +23,11 @@
       ('dashboard.revenue', 'Revenue'),
       ('dashboard.campaigns', 'Campaigns'),
       ('dashboard.morgan_chat', 'Morgan AI'),
+      ('dashboard.precall', 'Pre-Call Research'),
+      ('dashboard.proposal', 'Proposal Drafter'),
+      ('dashboard.call_summary', 'Call Summarizer'),
+      ('dashboard.objection', 'Objection Handler'),
+      ('dashboard.health_scan', 'Health Scan'),
     ] %}
     {% for endpoint, label in nav %}
     <a class="nav-item {% if request.endpoint == endpoint %}active{% endif %}" href="{{ url_for(endpoint) }}">

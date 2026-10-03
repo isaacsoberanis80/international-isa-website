@@ -1,0 +1,24 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Call Summarizer{% endblock %}
+{% block content %}
+<h1>Call Summarizer</h1>
+<p class="sub">Paste rough notes or a transcript — get what happened, decisions made, and action items with clear owners. Never invents a date or number you didn't write.</p>
+
+{% if not configured %}
+<div class="notice">Not configured — no Anthropic API key set.</div>
+{% endif %}
+
+<div class="panel">
+  <form method="post" style="display:flex; gap:10px; flex-direction:column;">
+    <textarea name="notes" rows="6" placeholder="Paste your raw call notes here..." style="padding:10px 12px; border-radius:8px; border:1px solid var(--border); font-size:14px; font-family:inherit;">{{ notes }}</textarea>
+    <button type="submit" class="btn" style="align-self:flex-start;">Summarize</button>
+  </form>
+</div>
+
+{% if summary %}
+<div class="panel">
+  <h2>Summary</h2>
+  <div style="white-space:pre-wrap; font-size:14.5px; line-height:1.6;">{{ summary }}</div>
+</div>
+{% endif %}
+{% endblock %}

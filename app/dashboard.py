@@ -24,6 +24,11 @@ from .db import (
     get_followups_due,
 )
 from .morgan import ask_morgan, is_configured as morgan_is_configured
+from .precall import research_for_call, is_configured as precall_is_configured
+from .proposal_agent import draft_proposal, is_configured as proposal_is_configured
+from .call_summarizer import summarize_call, is_configured as summarizer_is_configured
+from .objection_agent import handle_objection, is_configured as objection_is_configured
+from .health_scanner import scan_accounts, is_configured as health_is_configured
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
@@ -169,4 +174,91 @@ def morgan_chat():
         "dashboard/morgan.html",
         interactions=get_recent_morgan_interactions(),
         configured=morgan_is_configured(),
+    )
+
+
+@dashboard.route("/precall", methods=["GET", "POST"])
+@login_required
+def precall():
+    briefing, error, company = None, None, ""
+    if request.method == "POST":
+        company = request.form.get("company_name", "").strip()
+        contact_name = request.form.get("contact_name", "").strip()
+        contact_role = request.form.get("contact_role", "").strip()
+        briefing, error = research_for_call(company, contact_name, contact_role)
+        if error:
+            flash(error)
+    return render_template(
+        "dashboard/precall.html",
+        briefing=briefing,
+        company=company,
+        configured=precall_is_configured(),
+    )
+
+
+@dashboard.route("/proposal", methods=["GET", "POST"])
+@login_required
+def proposal():
+    proposal_text, error, situation = None, None, ""
+    if request.method == "POST":
+        situation = request.form.get("situation", "").strip()
+        proposal_text, error = draft_proposal(situation)
+        if error:
+            flash(error)
+    return render_template(
+        "dashboard/proposal.html",
+        proposal_text=proposal_text,
+        situation=situation,
+        configured=proposal_is_configured(),
+    )
+
+
+@dashboard.route("/call-summary", methods=["GET", "POST"])
+@login_required
+def call_summary():
+    summary, error, notes = None, None, ""
+    if request.method == "POST":
+        notes = request.form.get("notes", "").strip()
+        summary, error = summarize_call(notes)
+        if error:
+            flash(error)
+    return render_template(
+        "dashboard/call_summary.html",
+        summary=summary,
+        notes=notes,
+        configured=summarizer_is_configured(),
+    )
+
+
+@dashboard.route("/objection", methods=["GET", "POST"])
+@login_required
+def objection():
+    response_text, error, objection_text, competitor = None, None, "", ""
+    if request.method == "POST":
+        objection_text = request.form.get("objection_text", "").strip()
+        competitor = request.form.get("competitor", "").strip()
+        response_text, error = handle_objection(objection_text, competitor)
+        if error:
+            flash(error)
+    return render_template(
+        "dashboard/objection.html",
+        response_text=response_text,
+        objection_text=objection_text,
+        competitor=competitor,
+        configured=objection_is_configured(),
+    )
+
+
+@dashboard.route("/health-scan", methods=["GET", "POST"])
+@login_required
+def health_scan():
+    report, error = None, None
+    if request.method == "POST":
+        report, error = scan_accounts()
+        if error:
+            flash(error)
+    return render_template(
+        "dashboard/health_scan.html",
+        report=report,
+        configured=health_is_configured(),
     )

@@ -1,0 +1,24 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Proposal Drafter{% endblock %}
+{% block content %}
+<h1>Proposal Drafter</h1>
+<p class="sub">Describe the prospect's situation — it picks the right package from SERVICE_PACKAGES.md and drafts a ready-to-send proposal. Never quotes a price that isn't real.</p>
+
+{% if not configured %}
+<div class="notice">Not configured — no Anthropic API key set.</div>
+{% endif %}
+
+<div class="panel">
+  <form method="post" style="display:flex; gap:10px; flex-direction:column;">
+    <textarea name="situation" rows="4" placeholder="e.g. Small real estate team, 3 agents, missing ~half their inbound calls, hasn't hired an admin yet, budget-conscious" style="padding:10px 12px; border-radius:8px; border:1px solid var(--border); font-size:14px; font-family:inherit;">{{ situation }}</textarea>
+    <button type="submit" class="btn" style="align-self:flex-start;">Draft proposal</button>
+  </form>
+</div>
+
+{% if proposal_text %}
+<div class="panel">
+  <h2>Proposal</h2>
+  <div style="white-space:pre-wrap; font-size:14.5px; line-height:1.6;">{{ proposal_text }}</div>
+</div>
+{% endif %}
+{% endblock %}

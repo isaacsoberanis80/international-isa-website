@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+{% block title %}Pre-Call Research{% endblock %}
+{% block content %}
+<h1>Pre-Call Research</h1>
+<p class="sub">Give it a company (and contact, optional) — it searches the live web and hands you a 150-word briefing before you dial.</p>
+
+{% if not configured %}
+<div class="notice">Not configured — no Anthropic API key set.</div>
+{% endif %}
+
+<div class="panel">
+  <form method="post" style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
+    <div>
+      <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">Company</label>
+      <input type="text" name="company_name" value="{{ company }}" placeholder="e.g. Acme Realty Group" required style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); font-size:14px;">
+    </div>
+    <div>
+      <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">Contact name (optional)</label>
+      <input type="text" name="contact_name" placeholder="e.g. Jordan Lee" style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); font-size:14px;">
+    </div>
+    <div>
+      <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">Their role (optional)</label>
+      <input type="text" name="contact_role" placeholder="e.g. Office Manager" style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); font-size:14px;">
+    </div>
+    <button type="submit" class="btn">Research</button>
+  </form>
+</div>
+
+{% if briefing %}
+<div class="panel">
+  <h2>Briefing — {{ company }}</h2>
+  <div style="white-space:pre-wrap; font-size:14.5px; line-height:1.6;">{{ briefing }}</div>
+</div>
+{% endif %}
+{% endblock %}
